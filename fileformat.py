@@ -47,7 +47,7 @@ def return_file_format():
         with col3:
             st.write("")
             
-        st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2)
+        st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2')
             
         
             
