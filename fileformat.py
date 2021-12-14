@@ -47,6 +47,10 @@ def return_file_format():
         with col3:
             st.write("")
             
+        st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2)
+            
+        
+            
     if option == 'txt':
         st.success('You have an ideal data format!')
         st.markdown("TXT files are just like .csv files, organised in a [row, column] manner and therefore are easy to work with.")
