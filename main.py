@@ -9,6 +9,8 @@ from fileformat import *
 from columnnames import *
 from texteditors import *
 from number_of_variables import *
+from sample_rate import *
+
 
 st.sidebar.title("Select Chapter")
 st.sidebar.markdown("Each chapter explains a different aspect of validating your datasets.")
@@ -39,7 +41,8 @@ if add_selectbox == 'Column Names':
 if add_selectbox == 'Amount of Variables':
     return_number_of_variables()
         
-        
+if add_selectbox == 'Sample Rate':
+    return_sample_rate()
 # This removes the copyright of how the page is made
 hide_st_style = """
     <style>
