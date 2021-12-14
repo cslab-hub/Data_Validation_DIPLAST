@@ -28,3 +28,13 @@ def return_sample_rate():
     st.markdown('Which means that every 5 minutes your data is recorded.')
     
     st.warning('It depends on your goal wheter or not every second or every 5 minutes is prefered')
+    
+    st.error('Watch out if your data looks like the following:')
+    st.table(pd.DataFrame({
+            'Time': ['0', '1','2','3'],
+            'Sensor1': [10, 10, 11, 10],
+            'Sensor2': [14,15,14,14]
+        }))
+    
+    st.markdown('''In this case, there is no notion of time. The only information available is the order of the observations.
+                In this case, we advice you to figure out what the sample rate of you dataset is.''')
