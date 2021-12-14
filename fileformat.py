@@ -30,6 +30,8 @@ def return_file_format():
             'Sensor2': [10.21, 10.33, 11.12, 10.87]
         }).style.format('{:.2f}'))
         
+        st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2')
+        
     
     if option == 'excel':
         st.error('Better data formats are available!')
@@ -47,7 +49,6 @@ def return_file_format():
         with col3:
             st.write("")
             
-        st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2')
             
         
             
