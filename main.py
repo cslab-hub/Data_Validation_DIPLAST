@@ -11,6 +11,12 @@ from texteditors import *
 from number_of_variables import *
 from sample_rate import *
 
+st.set_page_config(
+     page_title="Data Validation",
+    #  page_icon="🧊",
+    #  layout="wide",
+    #  initial_sidebar_state="expanded",
+)
 
 st.sidebar.title("Select Chapter")
 st.sidebar.markdown("Each chapter explains a different aspect of validating your datasets.")

@@ -47,12 +47,11 @@ def return_sample_rate():
     st.markdown('''In this case, there is no notion of time. The only information available is the order of the observations.
                 In this case, we advice you to figure out what the sample rate of you dataset is.''')
     
-    st.write('test')
     # st.success('Tip 1: Calculate rolling average to smooth out observations')
     # st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2')
     
     # Create sample dataframe with resample example
-    index = pd.date_range('1-1-2000', periods=9, freq='D')
+    index = pd.date_range('1-1-2000', periods=9, freq='T')
     series = pd.Series(range(9), index=index)
     dataframe = pd.DataFrame(series, columns=['Measurement'])
     # dataframe = dataframe.style.format({'date': lambda x: "{}".format(x.strftime('%m/%d/%Y %H:%M:%S'))}).set_table_styles('styles')
@@ -60,5 +59,7 @@ def return_sample_rate():
     dataframe.columns = ['Time','Measurement']
     dataframe["Time"] = pd.to_datetime(dataframe["Time"])
     dataframe["Time"] = dataframe["Time"].dt.strftime("%Y-%m-%d %H:%M:%S")
-# st.dataframe(df
+    
+
     st.dataframe(dataframe)
+    
