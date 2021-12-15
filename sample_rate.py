@@ -4,10 +4,16 @@ import numpy as np
 from PIL import Image 
 
 def highlight_cols(x):
+      
     # copy df to new - original data is not changed
     df = x.copy()
-    # select all values to yellow color
-    df.loc[:, 0] = 'background-color: yellow'
+      
+    # select all values to green color
+    df.loc[:, :] = 'background-color: green'
+      
+    # overwrite values grey color
+    df[['Sensor1', 'Sensor2']] = 'background-color: grey'
+      
     # return color df
     return df 
 
@@ -20,7 +26,7 @@ def return_sample_rate():
             'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
             'Sensor1': [10, 10, 11, 10],
             'Sensor2': [14,15,14,14]
-        }).style.apply(highlight_cols, axis=0))
+        }).style.apply(highlight_cols, axis=None))
 
     
     st.markdown('This means that every second, each variable in your dataset takes a measurement.')
