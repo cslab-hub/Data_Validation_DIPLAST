@@ -21,7 +21,7 @@ def return_outliers():
     
     st.markdown("""
                 Imagine you have a dataset with the following data:
-                
+                There could be anomalies here.
                 
                 """)
     
