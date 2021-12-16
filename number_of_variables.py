@@ -28,3 +28,10 @@ def return_number_of_variables():
                     For example, the set variable of temperature can be 90 degrees, and the variables that measures temperature has the actual readings 90.1, 90.0, 89.9, 90 etc.
                     ''')
     
+    # st.empty()
+    
+    # st.success('Tip 1: Check descriptives to find set variables')
+    
+    
+    
+    

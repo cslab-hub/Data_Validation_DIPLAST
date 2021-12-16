@@ -10,6 +10,8 @@ from columnnames import *
 from texteditors import *
 from number_of_variables import *
 from sample_rate import *
+from descriptives import *
+from outliers import *
 
 st.set_page_config(
      page_title="Data Validation",
@@ -49,6 +51,14 @@ if add_selectbox == 'Amount of Variables':
         
 if add_selectbox == 'Sample Rate':
     return_sample_rate()
+    
+    
+    
+if add_selectbox == 'Descriptives':
+    return_descriptives()
+    
+if add_selectbox == 'Outliers':
+    return_outliers()
 # This removes the copyright of how the page is made
 hide_st_style = """
     <style>
