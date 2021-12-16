@@ -5,5 +5,3 @@
 
 Link to [Website](https://share.streamlit.io/cslab-hub/data_validation_diplast/main/main.py)
 
-testtest
-test
