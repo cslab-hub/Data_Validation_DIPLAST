@@ -12,7 +12,7 @@ fig = plt.plot(data['value'])
 fig, ax = plt.subplots()
 ax.plot(data['value'])
 
-
+#
 # new plot with anomalies
 
 data = pd.read_csv('https://raw.githubusercontent.com/DHI/tsod/main/tests/data/example.csv')
