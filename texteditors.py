@@ -10,7 +10,7 @@ def return_texteditors():
              After you have collected your data in either .csv or .txt, we have to inspect our data.\n
              Most likely you are used to Excel, however, for data analysis purposes, there are better options!\n
              
-             We recommend Sublime Text, which can open almost any file format.\n
+             We recommend [Sublime Text](https://www.sublimetext.com/), which can open almost any file format.\n
              Another great advantage of Sublime Text is that it open files significantly faster.
              
              
