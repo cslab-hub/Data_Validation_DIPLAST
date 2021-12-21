@@ -35,19 +35,23 @@ def return_file_format():
     
     if option == 'excel':
         st.error('Better data formats are available!')
-        st.markdown('#### Issue 1: The different runs are saved in other Sheets instead of different files.')
-        "CSV files are structured in a [row, column] manner and are easy to work with."
+        st.markdown("""
+        #### Issue 1: The data are saved in other Sheets instead of different files.\n
+        CSV files are structured in a [row, column] manner and are easy to work with.\n
+        In addition, other programs could experience issues when inporting excel data.
+        """)
         
         col1, col2, col3 = st.columns([1,2.5,1])
-        with col1:
-            st.write("")
+        # with col1:
+        #     st.write("")
 
         with col2:
             image = Image.open('images/excel_example.png')
             st.image(image, caption='Figure 1: Example of how Excel structures data.', use_column_width=True)
 
-        with col3:
-            st.write("")
+        st.success('Tip: Try to convert the Excel file to a .csv file for easier processing!')
+        # with col3:
+        #     st.write("")
             
             
         
