@@ -9,23 +9,32 @@ def return_sample_rate():
     st.title('Determine at what moments in time an observation is made.')
     st.markdown("It is very likely that one of the first variables in your dataset looks like the following:")
     
-    st.table(pd.DataFrame({
-            'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
-            'Sensor1': [10, 10, 11, 10],
-            'Sensor2': [14,15,14,14]
-        }))
+    def color_column(val):
+        color = 'lightgreen'
+        return f'background-color: {color}'
+
+    col1, col2, col3 = st.columns([1,2.5,1])
+
+    with col2:
+        st.dataframe(pd.DataFrame({
+                'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
+                'Sensor1': [10, 10, 11, 10],
+                'Sensor2': [14,15,14,14]
+            }).style.applymap(color_column, subset=['Time']))
 
     
     st.markdown('''In this dataset, the time variable reflects each moment an observation is recorded.
                 This means that every second, each variable in your dataset takes a measurement.''')
     
     st.markdown('It could, however, also be the case that your data looks like the following:')
+    col1, col2, col3 = st.columns([1,2.5,1])
     
-    st.table(pd.DataFrame({
-            'Time': ['21-12-21 10:00:00', '21-12-21 10:05:00','21-12-21 10:10:00','21-12-21 10:15:00'],
-            'Sensor1': [10, 10, 11, 10],
-            'Sensor2': [14,15,14,14]
-        }))
+    with col2:
+        st.table(pd.DataFrame({
+                'Time': ['21-12-21 10:00:00', '21-12-21 10:05:00','21-12-21 10:10:00','21-12-21 10:15:00'],
+                'Sensor1': [10, 10, 11, 10],
+                'Sensor2': [14,15,14,14]
+            }))
     
     st.markdown('Which means that every 5 minutes your data is recorded.')
     
@@ -38,11 +47,14 @@ def return_sample_rate():
     
     
     st.error('Watch out if your data looks like the following:')
-    st.table(pd.DataFrame({
-            'Time': ['0', '1','2','3'],
-            'Sensor1': [10, 10, 11, 10],
-            'Sensor2': [14,15,14,14]
-        }))
+    col1, col2, col3 = st.columns([1,2.5,1])
+
+    with col2:
+        st.table(pd.DataFrame({
+                'Time': ['0', '1','2','3'],
+                'Sensor1': [10, 10, 11, 10],
+                'Sensor2': [14,15,14,14]
+            }))
     
     st.markdown('''In this case, there is no notion of time. The only information available is the order of the observations.
                 In this case, we advice you to figure out what the sample rate of you dataset is.''')
@@ -52,7 +64,7 @@ def return_sample_rate():
     
     # Create sample dataframe with resample example
     index = pd.date_range('1-1-2000', periods=9, freq='T')
-    series = pd.Series(range(9), index=index)
+    series = pd.Series(range(1,10), index=index)
     dataframe = pd.DataFrame(series, columns=['Measurement'])
     # dataframe = dataframe.style.format({'date': lambda x: "{}".format(x.strftime('%m/%d/%Y %H:%M:%S'))}).set_table_styles('styles')
     dataframe = dataframe.reset_index()
@@ -60,6 +72,11 @@ def return_sample_rate():
     dataframe["Time"] = pd.to_datetime(dataframe["Time"])
     dataframe["Time"] = dataframe["Time"].dt.strftime("%Y-%m-%d %H:%M:%S")
     
+    df_values = dataframe.rolling(2).mean() 
+    df = dataframe.iloc[::2, :]
+    df['Measurement'] = df_values['Measurement']
+    # df.drop('Measurement')
+    df = df.iloc[0:,:]
 
     st.dataframe(dataframe)
-    
+    st.dataframe(df)

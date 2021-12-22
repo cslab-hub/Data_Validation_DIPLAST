@@ -30,18 +30,18 @@ def return_column_names():
         
         
         # Advanced
-        html_temp = """
-        <div style="background-color:tomato;padding:10px">
-        <h2 style="color:white;text-align:center;">Markdown html Example </h2>
-        </div>
-        """
-        st.markdown(html_temp,unsafe_allow_html=True)
+        # html_temp = """
+        # <div style="background-color:tomato;padding:10px">
+        # <h2 style="color:white;text-align:center;">Markdown html Example </h2>
+        # </div>
+        # """
+        # st.markdown(html_temp,unsafe_allow_html=True)
         
         
-        st.markdown(
-            '<span class="badge badge-pill badge-success"> Badge </span>',
-            unsafe_allow_html=True
-        )
+        # st.markdown(
+        #     '<span class="badge badge-pill badge-success"> Badge </span>',
+        #     unsafe_allow_html=True
+        # )
 
 
     if option == 'Heat_sensor1':
