@@ -8,11 +8,11 @@ def return_file_format():
 
     st.markdown("""
                 ### Take a look at your dataset in the folder where it is stored.\n
-                The file contains a specific file extension which is found after the filename.\n
-                For example, a file called dataset.csv has the file format comma-separated-value.\n
+                The file contains a specific file extension which is found after the filename.
+                For example, a file called dataset.csv has the file format comma-separated-value.
                 Excel files would have the name: .xlsx or .xsl.
                 
-                After you have found your file format, you can find it in the drop-down menu below:
+                After you have found your file format, you can select it in the drop-down menu below:
                 """)
 
 
