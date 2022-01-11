@@ -56,8 +56,17 @@ def return_sample_rate():
                 'Sensor2': [14,15,14,14]
             }))
     
-    st.markdown('''In this case, there is no notion of time. The only information available is the order of the observations.
-                In this case, we advice you to figure out what the sample rate of you dataset is.''')
+    st.markdown("""
+                In this case, there is no notion of time. The only information available is the order of the observations.
+                In this case, we advice you to figure out what the sample rate of you dataset is. \n
+                
+                In addition, it is also possible to change the sample rate in your dataset. \n
+                Consider the following dataframe where each minute a sample is taken from a variable called 'Measure'.\n
+                This dataset could be reduced in size by taken the average of sequential rows, which is visible in Table in the following two tables:
+
+                
+                
+                """)
     
     # st.success('Tip 1: Calculate rolling average to smooth out observations')
     # st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2')
@@ -68,15 +77,35 @@ def return_sample_rate():
     dataframe = pd.DataFrame(series, columns=['Measurement'])
     # dataframe = dataframe.style.format({'date': lambda x: "{}".format(x.strftime('%m/%d/%Y %H:%M:%S'))}).set_table_styles('styles')
     dataframe = dataframe.reset_index()
-    dataframe.columns = ['Time','Measurement']
+    dataframe.columns = ['Time','var1']
     dataframe["Time"] = pd.to_datetime(dataframe["Time"])
     dataframe["Time"] = dataframe["Time"].dt.strftime("%Y-%m-%d %H:%M:%S")
     
     df_values = dataframe.rolling(2).mean() 
     df = dataframe.iloc[::2, :]
-    df['Measurement'] = df_values['Measurement']
+    df['var1'] = df_values['var1']
     # df.drop('Measurement')
     df = df.iloc[0:,:]
 
-    st.dataframe(dataframe)
-    st.dataframe(df)
+    col1, col2, col3 = st.columns([1,2.5,1])
+    with col2:
+        st.dataframe(dataframe)
+        st.caption('testtest')
+        st.dataframe(df.iloc[1:,:])
+
+
+    st.error('Bad Example 2: Each timestamp contains different observations.')
+    st.markdown("""
+    It could occur that one variable in your dataset did not measure correctly every timepoint. \n
+    In this case, we advice to remove all the observations where even a single variable measured nothing, in order to prevent errors in the future analysis.\n
+
+    """)
+    inconsistent_df = dataframe.copy(deep = True)
+    inconsistent_df['var2'] = ["","","","4","5","6","7","8","9"]
+    inconsistent_df['var3'] = ["1","2","","4","5","6","7","8",""]
+
+
+    col1, col2, col3 = st.columns([1,6,1])
+    with col2:
+        st.table(inconsistent_df)
+        st.table(inconsistent_df.iloc[3:8,:])
