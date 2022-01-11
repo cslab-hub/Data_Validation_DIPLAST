@@ -62,7 +62,7 @@ if add_selectbox == 'Outliers':
     return_outliers()
 
 if add_selectbox == 'Missing Values & Data Imputation':
-    missing_values()
+    return_missing_values()
 # This removes the copyright of how the page is made
 hide_st_style = """
     <style>

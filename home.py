@@ -31,3 +31,10 @@ def return_homepage():
             """)
     
     
+    st.markdown("""
+    
+    Credits to all visuals used in this tool:
+    <div>Icons made by <a href="https://www.flaticon.com/authors/roundicons-premium" title="Roundicons Premium">Roundicons Premium</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    
+    
+    """,  unsafe_allow_html=True)
