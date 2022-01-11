@@ -11,7 +11,7 @@ data.to_csv('data/anomaly.csv', index=None)
 # fig = plt.plot(data['value'])
 
 #%%
-def first_plot():
+def first_plot(data):
     # fig = plt.figure()
 
     fig, ax = plt.subplots()
@@ -23,13 +23,12 @@ def first_plot():
     plt.xlabel("Time")
     plt.ylabel("Value")
 
-    plt.xlabel("Time")
-    plt.ylabel("Value")
+    plt.ylim([-0.1,3.1])
     return fig
 
 # fig, ax = plt.subplots()
 # ax.plot(data['value'])
-fig1 = first_plot()
+fig1 = first_plot(data)
 #
 # new plot with anomalies
 #%%
@@ -81,6 +80,13 @@ def outlier_spotter():
     return fig3
 
 first_fig = outlier_spotter()
+
+
+#%%
+outliers_removed = final_df.copy(deep=True)
+
+outliers_removed = outliers_removed[outliers_removed['identifier'] == 'b']
+third_fig = first_plot(outliers_removed)
 #%%
 
 def return_outliers():
@@ -110,6 +116,15 @@ def return_outliers():
     st.pyplot(first_fig)
     # st.pyplot(fig3)
 
+    st.markdown("""
+                The following Figure shows the same data, but with the outliers removed:        
+                """)
+    st.pyplot(third_fig)
+
+    st.markdown("""
+                A few observations can be made from this visualization. To start, the overall dynamics of the dataset have not changed. 
+                Plenty of information is still available, only the outliers have been removed.        
+                """)
 
     
 
