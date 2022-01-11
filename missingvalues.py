@@ -4,9 +4,12 @@ import numpy as np
 from PIL import Image 
 
 
-def missing_values():
+def return_missing_values():
     
-    st.title('Determine at what moments in time an observation is made.')
+    
+
+
+    st.title('It could occur that various variables did not measured all time points.')
     # st.markdown("It is very likely that one of the first variables in your dataset looks like the following:")
     
     # Create sample dataframe with resample example
@@ -28,18 +31,67 @@ def missing_values():
 
 
 
-    st.error('Bad Example 2: Each timestamp contains different observations.')
+    st.error('Bad Example 1: Each variable started recording at different timepoints.')
     st.markdown("""
-    It could occur that one variable in your dataset did not measure correctly every timepoint. \n
+    It could occur that one variable in your dataset did not measure correctly every timepoint. 
     In this case, we advice to remove all the observations where even a single variable measured nothing, in order to prevent errors in the future analysis.\n
 
     """)
     inconsistent_df = dataframe.copy(deep = True)
-    inconsistent_df['var2'] = ["","","","4","5","6","7","8","9"]
-    inconsistent_df['var3'] = ["1","2","","4","5","6","7","8",""]
+    inconsistent_df['var2'] = [np.nan, np.nan, np.nan,"4","5","6","7","8","9"]
+    inconsistent_df['var3'] = [np.nan,np.nan,np.nan,np.nan,"5","6","7","8","9"]
 
+    image = Image.open('images/down-arrow.png')
 
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
         st.table(inconsistent_df)
-        st.table(inconsistent_df.iloc[3:8,:])
+
+    col1, col2, col3 , col4, col5 = st.columns(5)
+
+    with col3 :
+        st.image(image, width =75)
+    
+    col1, col2, col3 = st.columns([1,6,1])
+    with col2:
+        st.table(inconsistent_df.iloc[4:,:])
+
+
+    st.error('Bad Example 2: There are  various missing values scattered around your dataset.')
+    st.markdown("""
+    It could occur that the variables in your dataset have scattered missing values. 
+    In this case, it is possible to delete these observations as well, but also imputing them from their neighbours. 
+    For example, in the following toy example dataset, it is possible to infer the linear pattern in the data. 
+    This is also possible with other kind of measurements!
+
+    """)
+    inconsistent_df = dataframe.copy(deep = True)
+    # inconsistent_df['var2'] = ["1","2","","4","5","","7","8","9"]
+    inconsistent_df['var2'] = [1,2,np.nan,4,5,np.nan,7,8,9]
+    inconsistent_df['var3'] = [1,np.nan,3,4,np.nan,6,np.nan,8,9]
+
+    # inconsistent_df['var3'] = ["1","","3","4","","6","","8","9"]
+
+    # col1, col2, col3 = st.columns([1,6,1])
+    # with col2:
+    #     st.table(inconsistent_df)
+    #     inconsistent_df['var2'] = inconsistent_df['var2'].interpolate().astype(int)
+    #     inconsistent_df['var3'] = inconsistent_df['var3'].interpolate().astype(int)
+
+    #     st.table(inconsistent_df)
+
+    col1, col2, col3 = st.columns([1,6,1])
+    with col2:
+        st.table(inconsistent_df)
+
+
+    col1, col2, col3 , col4, col5 = st.columns(5)
+
+    with col3 :
+        st.image(image, width =75)
+    
+    col1, col2, col3 = st.columns([1,6,1])
+    with col2:
+        inconsistent_df['var2'] = inconsistent_df['var2'].interpolate().astype(int)
+        inconsistent_df['var3'] = inconsistent_df['var3'].interpolate().astype(int)
+        st.table(inconsistent_df)
