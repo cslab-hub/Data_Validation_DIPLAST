@@ -12,6 +12,7 @@ from number_of_variables import *
 from sample_rate import *
 from descriptives import *
 from outliers import *
+from missingvalues import *
 
 st.set_page_config(
      page_title="Data Validation",
@@ -59,6 +60,9 @@ if add_selectbox == 'Descriptives':
     
 if add_selectbox == 'Outliers':
     return_outliers()
+
+if add_selectbox == 'Missing Values & Data Imputation':
+    missing_values()
 # This removes the copyright of how the page is made
 hide_st_style = """
     <style>

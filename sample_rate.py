@@ -68,8 +68,7 @@ def return_sample_rate():
                 
                 """)
     
-    # st.success('Tip 1: Calculate rolling average to smooth out observations')
-    # st.success('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2')
+    st.success('Tip 1: Calculate rolling average to smooth out observations')
     
     # Create sample dataframe with resample example
     index = pd.date_range('1-1-2000', periods=9, freq='T')
