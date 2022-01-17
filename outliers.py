@@ -97,7 +97,7 @@ def return_outliers():
                 """)
     
     col1, col2, col3 = st.columns([1,2.5,1])
-    col2.dataframe(data)
+    col2.table(data)
 
     st.markdown("""
                 It is hard to spot wether something is wrong with this dataset by looking at it in a table manner. 
