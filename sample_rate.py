@@ -16,7 +16,7 @@ def return_sample_rate():
     col1, col2, col3 = st.columns([1,2.5,1])
 
     with col2:
-        st.dataframe(pd.DataFrame({
+        st.table(pd.DataFrame({
                 'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
