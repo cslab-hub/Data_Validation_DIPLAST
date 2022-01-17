@@ -7,7 +7,7 @@ def return_homepage():
     image = Image.open('images/logo.jpeg')
     st.image(image, use_column_width=True)
 
-    st.title('Welcome to the Data Validation Tool!..')
+    st.title('Welcome to the Data Validation Tool!')
     st.markdown(
         """
         ## The Data Validation tool consists of several chapters that each discuss a different aspect of validation your data.\n
@@ -30,7 +30,23 @@ def return_homepage():
 
             """)
     
-    
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+
     st.markdown("""
     
     Credits to all visuals used in this tool:
@@ -38,3 +54,5 @@ def return_homepage():
     
     
     """,  unsafe_allow_html=True)
+
+    

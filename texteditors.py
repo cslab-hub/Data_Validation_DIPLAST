@@ -17,5 +17,5 @@ def return_texteditors():
              """)
     image = Image.open('images/sublime.png')
     st.image(image, caption='Figure 1: Example of Sublime Text', use_column_width=True)
-    
+
     

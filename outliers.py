@@ -11,7 +11,7 @@ data.to_csv('data/anomaly.csv', index=None)
 # fig = plt.plot(data['value'])
 
 #%%
-def first_plot(data):
+def first_plot(data, title):
     # fig = plt.figure()
 
     fig, ax = plt.subplots()
@@ -19,7 +19,7 @@ def first_plot(data):
 
     plt.scatter(data.index, data['value'], c='b', s=15)
     plt.plot(data.index, data['value'])
-    plt.title("Spotted Outliers")
+    plt.title(title)
     plt.xlabel("Time")
     plt.ylabel("Value")
 
@@ -28,7 +28,7 @@ def first_plot(data):
 
 # fig, ax = plt.subplots()
 # ax.plot(data['value'])
-fig1 = first_plot(data)
+fig1 = first_plot(data, 'Plotted Data')
 #
 # new plot with anomalies
 #%%
@@ -86,7 +86,7 @@ first_fig = outlier_spotter()
 outliers_removed = final_df.copy(deep=True)
 
 outliers_removed = outliers_removed[outliers_removed['identifier'] == 'b']
-third_fig = first_plot(outliers_removed)
+third_fig = first_plot(outliers_removed, 'Outliers Removed')
 #%%
 
 def return_outliers():
