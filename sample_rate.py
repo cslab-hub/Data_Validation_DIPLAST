@@ -6,12 +6,14 @@ from PIL import Image
 
 def return_sample_rate():
     
-    st.title('Determine at what moments in time an observation is made.')
-    st.markdown("It is very likely that one of the first variables in your dataset looks like the following:")
-    
+    st.title('Determine the Sample Rate.')
+    st.markdown("It is very likely that one of the first variables in your dataset looks like the following (highlighted in green):")
+    # st.markdown(<font color=‘red’>THIS TEXT WILL BE RED</font>, unsafe_allow_html=True)))
+
     def color_column(val):
         color = 'lightgreen'
         return f'background-color: {color}'
+
 
     col1, col2, col3 = st.columns([1,2.5,1])
 

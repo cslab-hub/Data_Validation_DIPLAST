@@ -28,7 +28,7 @@ st.sidebar.markdown("Each chapter explains a different aspect of validating your
 
 add_selectbox = st.sidebar.radio(
     "Choose a chapter:",
-    ("Home","File Format","Text Editors" ,"Column Names", "Amount of Variables","Sample Rate","Descriptives","Outliers","Missing Values & Data Imputation"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
+    ("Home","Chapter 1: File Format","Chapter 2: Text Editors" ,"Chapter 3: Column Names", "Chapter 4: Amount of Variables","Chapter 5: Sample Rate","Chapter 6: Descriptives","Chapter 7: Outliers","Chapter 8: Missing Values & Data Imputation"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
     
 )  
 
@@ -39,30 +39,30 @@ if add_selectbox == 'Home':
     
     
 #! Page for the file format
-if add_selectbox == 'File Format':
+if add_selectbox == 'Chapter 1: File Format':
     return_file_format()
   
-if add_selectbox == 'Text Editors':
+if add_selectbox == 'Chapter 2: Text Editors':
     return_texteditors()
         
-if add_selectbox == 'Column Names':
+if add_selectbox == 'Chapter 3: Column Names':
     return_column_names()
 
-if add_selectbox == 'Amount of Variables':
+if add_selectbox == 'Chapter 4: Amount of Variables':
     return_number_of_variables()
         
-if add_selectbox == 'Sample Rate':
+if add_selectbox == 'Chapter 5: Sample Rate':
     return_sample_rate()
     
     
     
-if add_selectbox == 'Descriptives':
+if add_selectbox == 'Chapter 6: Descriptives':
     return_descriptives()
     
-if add_selectbox == 'Outliers':
+if add_selectbox == 'Chapter 7: Outliers':
     return_outliers()
 
-if add_selectbox == 'Missing Values & Data Imputation':
+if add_selectbox == 'Chapter 8: Missing Values & Data Imputation':
     return_missing_values()
 # This removes the copyright of how the page is made
 hide_st_style = """
