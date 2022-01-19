@@ -13,7 +13,7 @@ from sample_rate import *
 from descriptives import *
 from outliers import *
 from missingvalues import *
-from streamlit_option_menu import option_menu
+# from streamlit_option_menu import option_menu
 
 st.set_page_config(
      page_title="Data Validation",
