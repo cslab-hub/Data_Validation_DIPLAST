@@ -55,4 +55,3 @@ def return_homepage():
     
     """,  unsafe_allow_html=True)
 
-    

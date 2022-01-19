@@ -4,3 +4,4 @@ streamlit
 sklearn
 matplotlib
 pandas
+# streamlit_option_menu

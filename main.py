@@ -13,6 +13,7 @@ from sample_rate import *
 from descriptives import *
 from outliers import *
 from missingvalues import *
+from streamlit_option_menu import option_menu
 
 st.set_page_config(
      page_title="Data Validation",
@@ -29,7 +30,7 @@ add_selectbox = st.sidebar.radio(
     "Choose a chapter:",
     ("Home","File Format","Text Editors" ,"Column Names", "Amount of Variables","Sample Rate","Descriptives","Outliers","Missing Values & Data Imputation"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
     
-)                                                                                                                       
+)  
 
 
 #! Home page
