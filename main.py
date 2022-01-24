@@ -1,6 +1,7 @@
 import streamlit as st
 # st.set_page_config(layout="wide")
 import pandas as pd
+pd.options.mode.chained_assignment = None
 import numpy as np
 from PIL import Image 
 

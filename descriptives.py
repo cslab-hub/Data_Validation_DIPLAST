@@ -35,9 +35,33 @@ def return_descriptives():
                 It is possible to learn a lot about the dataset by inspecting these summary statistics:
                 """)
 
-    st.table(dataframe.describe())
+    # with pd.option_context('display.float_format', '{0:.2f}'.format):
+    st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)))
 
     st.markdown("""
                 For example, we can already see that the variable called: 'var4' does not deviate in measurement.
                 This could indicate that this variable does not provide any new information to us, we could remove it!
                 """)
+
+
+    st.title("Density plot of variables")
+
+    st.markdown("""
+                A quick inspection of your dataset can also be performed by looking at Density plots of your data.
+                These density plots look at the distribution of all the values measured by a variable.
+                It could be helpfull to think about a 'safe' range of values where you expect a sensor's data to fall into.
+                If then these density plots show a complete different story, this could be an indication to check what is going on.
+                """)
+
+    iris = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
+    iris['sepal_width'] = iris['sepal_width'] + 90
+    iris['sepal_length'] = iris['sepal_length'] + 90
+    # sepal_length
+    iris.columns = ['Temp1','Temp2','Temp3','Temp4','Temp5']
+    # st.table(iris.head(5))
+    import matplotlib.pyplot as plt
+    # dat=[-1,2,1,4,-5,3,6,1,2,1,2,5,6,5,6,2,2,2]
+    iris_plot = iris[['Temp1','Temp2']].plot(kind='density')
+    iris_plot.set_xlabel("Temperature")
+    iris_plot.set_ylabel("Density")
+    st.pyplot(iris_plot.figure, clear_figure=True)

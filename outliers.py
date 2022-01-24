@@ -1,6 +1,7 @@
 #%%
 import streamlit as st
 import pandas as pd
+# pd.set_option('mode.chained_assignment', None)
 import numpy as np
 from PIL import Image 
 import matplotlib.pyplot as plt 
@@ -37,7 +38,8 @@ q_low = data["value"].quantile(0.05)
 q_hi  = data["value"].quantile(0.95)
 
 df_filtered = data[(data["value"] < q_hi) & (data["value"] > q_low)]
-df_filtered['identifier'] = 'b'
+with pd.option_context('mode.chained_assignment', None):
+    df_filtered['identifier'] = 'b'
 
 #%%
 ##
@@ -47,6 +49,8 @@ og_set - new_set
 
 filtered_df_values = pd.DataFrame(data.loc[og_set - new_set])
 filtered_df_values = filtered_df_values.sort_values('datetime')
+# with pd.option_context('mode.chained_assignment', None):
+    # data[data.bidder == 'parakeet2004']['bidderrate'] = 100
 filtered_df_values['identifier'] = 'r'
 final_df = df_filtered.combine_first(filtered_df_values)
 

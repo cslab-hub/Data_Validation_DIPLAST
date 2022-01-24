@@ -25,10 +25,13 @@ def return_sample_rate():
             }).style.applymap(color_column, subset=['Time']))
 
     
-    st.markdown('''In this dataset, the time variable reflects each moment an observation is recorded.
-                This means that every second, each variable in your dataset takes a measurement.''')
+    st.markdown("""
+                In this dataset, the time variable reflects each moment an observation is recorded.
+                This means that every second, each variable in your dataset takes a measurement.
+                \n
+                It could, however, also be the case that your data looks like the following:
+                """)
     
-    st.markdown('It could, however, also be the case that your data looks like the following:')
     col1, col2, col3 = st.columns([1,2.5,1])
     
     with col2:
@@ -36,7 +39,7 @@ def return_sample_rate():
                 'Time': ['21-12-21 10:00:00', '21-12-21 10:05:00','21-12-21 10:10:00','21-12-21 10:15:00'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
-            }))
+            }).style.applymap(color_column, subset=['Time']))
     
     st.markdown('Which means that every 5 minutes your data is recorded.')
     
@@ -56,7 +59,7 @@ def return_sample_rate():
                 'Time': ['0', '1','2','3'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
-            }))
+            }).style.applymap(color_column, subset=['Time']))
     
     st.markdown("""
                 In this case, there is no notion of time. The only information available is the order of the observations.
