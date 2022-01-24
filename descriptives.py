@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+pd.set_option('display.colheader_justify', 'center')
 import numpy as np
 from PIL import Image 
 
@@ -8,11 +9,11 @@ def return_descriptives():
     st.title('Initial inspection of your dataset')
     
     st.markdown("""
-                It is also valuable to check the initial descriptives of your dataset.
+                It is also to check the initial descriptives of your dataset.
                 There are several ways to achieve this. 
-                For example, in Excel it is possible to select the columns of your dataset and calculate the following metrics:
+                For example, consider the following dataset:
                 """)
-    st.success('Tip: Calculate the Mean, ST.Dev, Variance, Min & Max of each variable in your dataset.')
+    # st.success('Tip: Calculate the Mean, ST.Dev, Variance, Min & Max of each variable in your dataset.')
 
     index = pd.date_range('1-1-2000', periods=9, freq='T')
     series = pd.Series(range(1,10), index=index)
@@ -26,9 +27,22 @@ def return_descriptives():
 
     dataframe['var2'] = dataframe['var1'] + np.random.randint(10,size=9)
     dataframe['var3'] = 1 + np.random.uniform(low=0.0001, high=0.1,size=9)
-    dataframe['var4'] = 1
+    dataframe['var4'] = 3
     dataframe = dataframe[['Time','var2','var3','var4']]
-    st.table(dataframe)
+    # st.table(dataframe)
+
+    style1 = dataframe.style.set_table_styles([{"selector": "thead", "props": "color: blue; font-size:20px;"}])
+    # st.table(style1)
+
+    st.table(dataframe.style.set_table_styles([
+                            {
+                                "selector":"thead",
+                                "props": [("background-color", "white"), ("color", "blue"),
+                                        #   ("border", "3px solid black"),
+                                          ("font-size", "24px"), ("font-style", "italic")]
+                            },
+
+                        ]) )
 
 
     st.markdown("""
@@ -43,7 +57,7 @@ def return_descriptives():
     st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)))
 
 
-    st.title("Density plot of variables")
+    st.markdown("# Density plot of variables")
 
     st.markdown("""
                 A quick inspection of your dataset can also be performed by looking at Density plots of your data.
@@ -55,12 +69,9 @@ def return_descriptives():
     iris = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
     iris['sepal_width'] = iris['sepal_width'] + 90
     iris['sepal_length'] = iris['sepal_length'] + 90
-    # sepal_length
     iris.columns = ['Temp1','Temp2','Temp3','Temp4','Temp5']
-    # st.table(iris.head(5))
     import matplotlib.pyplot as plt
-    # dat=[-1,2,1,4,-5,3,6,1,2,1,2,5,6,5,6,2,2,2]
-    iris_plot = iris[['Temp1','Temp2']].plot(kind='density')
+    iris_plot = iris[['Temp1','Temp2']].plot(kind='density', figsize=(8,4))
     iris_plot.set_xlabel("Temperature")
     iris_plot.set_ylabel("Density")
     st.pyplot(iris_plot.figure, clear_figure=True)

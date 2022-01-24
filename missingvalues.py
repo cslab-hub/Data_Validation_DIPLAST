@@ -45,7 +45,7 @@ def return_missing_values():
 
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df)
+        st.table(inconsistent_df.style.highlight_null(null_color="tomato"))
 
     col1, col2, col3 , col4, col5 = st.columns(5)
 
@@ -82,7 +82,7 @@ def return_missing_values():
 
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df)
+        st.table(inconsistent_df.style.highlight_null(null_color="tomato"))
 
 
     col1, col2, col3 , col4, col5 = st.columns(5)
