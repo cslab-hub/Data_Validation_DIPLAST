@@ -15,7 +15,7 @@ data.to_csv('data/anomaly.csv', index=None)
 def first_plot(data, title):
     # fig = plt.figure()
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8,3))
     # ax.plot(data['value'])
 
     plt.scatter(data.index, data['value'], c='b', s=15)
@@ -75,7 +75,7 @@ final_df = df_filtered.combine_first(filtered_df_values)
 
 def outlier_spotter():
     # fig = plt.figure()
-    fig3, ax = plt.subplots()
+    fig3, ax = plt.subplots(figsize=(8,3))
     plt.scatter(final_df.index, final_df['value'],c=final_df['identifier'], s=15)
     plt.plot(final_df.index, final_df['value'])
     plt.title("Spotted Outliers")

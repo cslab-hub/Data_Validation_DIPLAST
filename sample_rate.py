@@ -29,7 +29,7 @@ def return_sample_rate():
                 In this dataset, the time variable reflects each moment an observation is recorded.
                 This means that every second, each variable in your dataset takes a measurement.
                 \n
-                It could, however, also be the case that your data looks like the following:
+                It could, however, also be the case that your data looks like the following, where every 5 minutes the data is recorded:
                 """)
     
     col1, col2, col3 = st.columns([1,2.5,1])
@@ -41,7 +41,7 @@ def return_sample_rate():
                 'Sensor2': [14,15,14,14]
             }).style.applymap(color_column, subset=['Time']))
     
-    st.markdown('Which means that every 5 minutes your data is recorded.')
+    # st.markdown('Which means that every 5 minutes your data is recorded.')
     
     st.warning('It depends on your goal wheter or not every second or every 5 minutes is prefered')
     
@@ -63,23 +63,27 @@ def return_sample_rate():
     
     st.markdown("""
                 In this case, there is no notion of time. The only information available is the order of the observations.
-                In this case, we advice you to figure out what the sample rate of you dataset is. \n
+                In this case, we advice you to figure out what the sample rate of you dataset is. 
                 
-                In addition, it is also possible to change the sample rate in your dataset. \n
-                Consider the following dataframe where each minute a sample is taken from a variable called 'Measure'.\n
-                This dataset could be reduced in size by taken the average of sequential rows, which is visible in Table in the following two tables:
-
-                
-                
+                In addition, it is also possible to change the sample rate in your dataset. 
+                Consider the following dataframe where each minute a sample is taken from a variable called 'Measure'.
+                This dataset could be reduced in size by taken the average of sequential rows, which is visible in Table in the following two tables: 
                 """)
     
+    st.title('How to improve')
+
     st.success('Tip 1: Calculate rolling average to smooth out observations')
     
+    st.markdown("""
+    Consider the following dataset where the Variable 'var1' measures a random variable that counts up.
+    However, it could be that the dataset is way to big, and needs some resampling to reduce the number of observations.
+    Therefore, a technique called 'resampling' takes the average value for some time periods to reduce the dataset.
+    """)
+
     # Create sample dataframe with resample example
     index = pd.date_range('1-1-2000', periods=9, freq='T')
     series = pd.Series(range(1,10), index=index)
     dataframe = pd.DataFrame(series, columns=['Measurement'])
-    # dataframe = dataframe.style.format({'date': lambda x: "{}".format(x.strftime('%m/%d/%Y %H:%M:%S'))}).set_table_styles('styles')
     dataframe = dataframe.reset_index()
     dataframe.columns = ['Time','var1']
     dataframe["Time"] = pd.to_datetime(dataframe["Time"])
@@ -88,28 +92,10 @@ def return_sample_rate():
     df_values = dataframe.rolling(2).mean() 
     df = dataframe.iloc[::2, :]
     df['var1'] = df_values['var1']
-    # df.drop('Measurement')
-    df = df.iloc[0:,:]
+    df = df.iloc[1:,:]
+    df['var1'] = ['2.5','4.5','6.5','8.5']
 
     col1, col2, col3 = st.columns([1,2.5,1])
     with col2:
         st.dataframe(dataframe)
-        st.caption('testtest')
-        st.dataframe(df.iloc[1:,:])
-
-
-    st.error('Bad Example 2: Each timestamp contains different observations.')
-    st.markdown("""
-    It could occur that one variable in your dataset did not measure correctly every timepoint. \n
-    In this case, we advice to remove all the observations where even a single variable measured nothing, in order to prevent errors in the future analysis.\n
-
-    """)
-    inconsistent_df = dataframe.copy(deep = True)
-    inconsistent_df['var2'] = ["","","","4","5","6","7","8","9"]
-    inconsistent_df['var3'] = ["1","2","","4","5","6","7","8",""]
-
-
-    col1, col2, col3 = st.columns([1,6,1])
-    with col2:
-        st.table(inconsistent_df)
-        st.table(inconsistent_df.iloc[3:8,:])
+        st.table(df.round(2))

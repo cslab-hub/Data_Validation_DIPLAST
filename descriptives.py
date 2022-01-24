@@ -32,16 +32,15 @@ def return_descriptives():
 
 
     st.markdown("""
-                It is possible to learn a lot about the dataset by inspecting these summary statistics:
-                """)
-
-    # with pd.option_context('display.float_format', '{0:.2f}'.format):
-    st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)))
-
-    st.markdown("""
+                It is possible to learn a lot about the dataset by inspecting these summary statistics.
                 For example, we can already see that the variable called: 'var4' does not deviate in measurement.
-                This could indicate that this variable does not provide any new information to us, we could remove it!
+                This could indicate that this variable does not provide any new information to us, we could remove it! \n
+
+                Second, we can see that the Mean of Variable var2 is much higher than Var3 or var4. 
+                If this behavior is expected it is okay, but you should check every value to know what the variable represents.
                 """)
+
+    st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)))
 
 
     st.title("Density plot of variables")

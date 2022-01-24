@@ -23,8 +23,10 @@ st.set_page_config(
     #  initial_sidebar_state="expanded",
 )
 
+st.sidebar.image("images/logo.jpeg", use_column_width=True)
+st.sidebar.image("images/jadslogo.png", use_column_width=True)
 st.sidebar.title("Select Chapter")
-st.sidebar.markdown("Each chapter explains a different aspect of validating your datasets.")
+st.sidebar.markdown("Each chapter explains a different aspect of validating your dataset.")
 
 
 add_selectbox = st.sidebar.radio(
@@ -32,6 +34,7 @@ add_selectbox = st.sidebar.radio(
     ("Home","Chapter 1: File Format","Chapter 2: Text Editors" ,"Chapter 3: Column Names", "Chapter 4: Amount of Variables","Chapter 5: Sample Rate","Chapter 6: Descriptives","Chapter 7: Outliers","Chapter 8: Missing Values & Data Imputation"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
     
 )  
+
 
 
 #! Home page
