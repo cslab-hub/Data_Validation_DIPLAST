@@ -6,10 +6,27 @@ from PIL import Image
 def return_column_names():
     st.title('Open the dataset in your program by choice. What do the variable names look like?')
     
+    col1, col2, col3 = st.columns([1,2.5,1])
+
+    with col2:
+         st.table(pd.DataFrame({
+                'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
+                'Sensor1': [10, 10, 11, 10],
+                'Sensor2': [14,15,14,14]
+            }).style.set_table_styles([
+                            {
+                                "selector":"thead",
+                                "props": [("background-color", "white"), ("color", "black"),
+                                          ("border", "3px solid black")]
+                            },
+
+                        ]) )
+
+
+
     option = st.selectbox(
         'How do your variable names look like?',
         ['','Ex1Var1_01','Heat_sensor1','Drehzalh01','No Variable Names'],format_func=lambda x: 'Select an option' if x == '' else x)
-    # 'You selected: ', option
     
     if option == 'Ex1Var1_01':
         st.table(pd.DataFrame({

@@ -4,14 +4,15 @@ import numpy as np
 from PIL import Image 
 
 
+
 def return_sample_rate():
     
-    st.title('Determine the Sample Rate.')
+    st.title('Determine the Sample Rate')
     st.markdown("It is very likely that one of the first variables in your dataset looks like the following (highlighted in green):")
     # st.markdown(<font color=‘red’>THIS TEXT WILL BE RED</font>, unsafe_allow_html=True)))
 
     def color_column(val):
-        color = 'lightgreen'
+        color = '#32CD32'
         return f'background-color: {color}'
 
 
@@ -24,7 +25,12 @@ def return_sample_rate():
                 'Sensor2': [14,15,14,14]
             }).style.applymap(color_column, subset=['Time']))
 
-    
+        # st.write(pd.DataFrame({
+        #         'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
+        #         'Sensor1': [10, 10, 11, 10],
+        #         'Sensor2': [14,15,14,14]
+        #     }).style.hide_index().to_html(), unsafe_allow_html=True)
+
     st.markdown("""
                 In this dataset, the time variable reflects each moment an observation is recorded.
                 This means that every second, each variable in your dataset takes a measurement.

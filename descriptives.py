@@ -28,11 +28,8 @@ def return_descriptives():
     dataframe['var2'] = dataframe['var1'] + np.random.randint(10,size=9)
     dataframe['var3'] = 1 + np.random.uniform(low=0.0001, high=0.1,size=9)
     dataframe['var4'] = 3
-    dataframe = dataframe[['Time','var2','var3','var4']]
-    # st.table(dataframe)
-
-    style1 = dataframe.style.set_table_styles([{"selector": "thead", "props": "color: blue; font-size:20px;"}])
-    # st.table(style1)
+    dataframe['var5'] = 'one'
+    dataframe = dataframe[['Time','var2','var3','var4','var5']]
 
     st.table(dataframe.style.set_table_styles([
                             {
@@ -75,3 +72,21 @@ def return_descriptives():
     iris_plot.set_xlabel("Temperature")
     iris_plot.set_ylabel("Density")
     st.pyplot(iris_plot.figure, clear_figure=True)
+
+
+    st.markdown('# Data types of variables')
+    st.markdown("""
+                It is also possible to check the data types of your variables. 
+                Consider again Table 1 above in this page, here are the first two rows visualized in Table 2.
+                """)
+
+    st.table(dataframe.head(2))
+    dtype_df = dataframe.dtypes.value_counts().reset_index()
+
+    dtype_df.columns = ['VariableType','Count']
+    dtype_df['VariableType'] = dtype_df['VariableType'].astype(str)
+    dtypefig, dtypeax = plt.subplots(figsize=(8,4))
+    dtypeax.set_yticks(np.arange(0,3,1))
+    # fig.set_size_inches(24.5, 16.5)
+    dtypeax.bar(dtype_df['VariableType'],dtype_df['Count'])
+    st.pyplot(dtypefig)
