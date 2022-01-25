@@ -6,7 +6,7 @@ from PIL import Image
 
 
 def return_descriptives():
-    st.title('Initial inspection of your dataset')
+    st.title('Descriptives of your dataset')
     
     st.markdown("""
                 It is also to check the initial descriptives of your dataset.
@@ -67,6 +67,7 @@ def return_descriptives():
     iris['sepal_width'] = iris['sepal_width'] + 90
     iris['sepal_length'] = iris['sepal_length'] + 90
     iris.columns = ['Temp1','Temp2','Temp3','Temp4','Temp5']
+
     import matplotlib.pyplot as plt
     iris_plot = iris[['Temp1','Temp2']].plot(kind='density', figsize=(8,4))
     iris_plot.set_xlabel("Temperature")
@@ -78,6 +79,9 @@ def return_descriptives():
     st.markdown("""
                 It is also possible to check the data types of your variables. 
                 Consider again Table 1 above in this page, here are the first two rows visualized in Table 2.
+                These values all are of different kinds. For example, 'var3' is measuring a numerical value with decimals.
+                On the other hand, 'var4' is measuring a numerical value of whole numbers. 
+                In addition, 'var5' is measuring a word which does not resemble numbers. 
                 """)
 
     st.table(dataframe.head(2))
