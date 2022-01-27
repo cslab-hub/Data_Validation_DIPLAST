@@ -6,6 +6,12 @@ from PIL import Image
 def return_column_names():
     st.title('Open the dataset in your program by choice. What do the variable names look like?')
     
+    st.markdown("""
+    Notice the black bar highlighting the names of the variables.
+    Take a look your dataset in your own program (SublimeTexts, Microsoft Excel).
+    
+    """)
+
     col1, col2, col3 = st.columns([1,2.5,1])
 
     with col2:
@@ -20,7 +26,13 @@ def return_column_names():
                                           ("border", "3px solid black")]
                             },
 
-                        ]) )
+                            {"selector":"caption",
+                            "props":[("text-align","center")]
+
+
+                            },
+
+                        ]).set_caption("Table 1: Dataset.") )
 
 
 

@@ -12,7 +12,7 @@ def return_sample_rate():
     # st.markdown(<font color=‘red’>THIS TEXT WILL BE RED</font>, unsafe_allow_html=True)))
 
     def color_column(val):
-        color = '#32CD32'
+        color = 'lightgreen'
         return f'background-color: {color}'
 
 
@@ -23,13 +23,20 @@ def return_sample_rate():
                 'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
-            }).style.applymap(color_column, subset=['Time']))
+            }).style.set_table_styles([
+                            # {
+                            #     "selector":"thead",
+                            #     "props": [("background-color", "white"), ("color", "black"),
+                            #               ("border", "3px solid black")]
+                            # },
 
-        # st.write(pd.DataFrame({
-        #         'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
-        #         'Sensor1': [10, 10, 11, 10],
-        #         'Sensor2': [14,15,14,14]
-        #     }).style.hide_index().to_html(), unsafe_allow_html=True)
+                            {"selector":"caption",
+                            "props":[("text-align","center")]
+
+
+                            },
+
+                        ]).set_caption("Table 1: Dataset.").applymap(color_column, subset=['Time']) )
 
     st.markdown("""
                 In this dataset, the time variable reflects each moment an observation is recorded.
@@ -45,7 +52,20 @@ def return_sample_rate():
                 'Time': ['21-12-21 10:00:00', '21-12-21 10:05:00','21-12-21 10:10:00','21-12-21 10:15:00'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
-            }).style.applymap(color_column, subset=['Time']))
+            }).style.set_table_styles([
+                            # {
+                            #     "selector":"thead",
+                            #     "props": [("background-color", "white"), ("color", "black"),
+                            #               ("border", "3px solid black")]
+                            # },
+
+                            {"selector":"caption",
+                            "props":[("text-align","center")]
+
+
+                            },
+
+                        ]).set_caption("Table 2: Dataset.").applymap(color_column, subset=['Time']) )
     
     # st.markdown('Which means that every 5 minutes your data is recorded.')
     

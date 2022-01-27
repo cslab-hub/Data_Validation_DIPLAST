@@ -14,6 +14,8 @@ from sample_rate import *
 from descriptives import *
 from outliers import *
 from missingvalues import *
+from correlation import *
+from endresult import *
 # from streamlit_option_menu import option_menu
 
 st.set_page_config(
@@ -31,7 +33,7 @@ st.sidebar.markdown("Each chapter explains a different aspect of validating your
 
 add_selectbox = st.sidebar.radio(
     "Choose a chapter:",
-    ("Home","Chapter 1: File Format","Chapter 2: Text Editors" ,"Chapter 3: Column Names", "Chapter 4: Amount of Variables","Chapter 5: Sample Rate","Chapter 6: Descriptives","Chapter 7: Outliers","Chapter 8: Missing Values & Data Imputation"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
+    ("Home","Chapter 1: File Format","Chapter 2: Text Editors" ,"Chapter 3: Column Names", "Chapter 4: Amount of Variables","Chapter 5: Sample Rate","Chapter 6: Descriptives","Chapter 7: Outliers","Chapter 8: Missing Values & Data Imputation","Chapter 9: Correlation","Chapter 10: End Result"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
     
 )  
 
@@ -68,6 +70,12 @@ if add_selectbox == 'Chapter 7: Outliers':
 
 if add_selectbox == 'Chapter 8: Missing Values & Data Imputation':
     return_missing_values()
+
+if add_selectbox == 'Chapter 9: Correlation':
+    return_correlation()
+
+if add_selectbox == 'Chapter 10: End Result':
+    return_endresult()
 # This removes the copyright of how the page is made
 hide_st_style = """
     <style>
