@@ -16,7 +16,7 @@ def return_sample_rate():
         return f'background-color: {color}'
 
 
-    col1, col2, col3 = st.columns([1,2.5,1])
+    col1, col2, col3 = st.columns([1,5,1])
 
     with col2:
         st.table(pd.DataFrame({
@@ -24,19 +24,25 @@ def return_sample_rate():
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
             }).style.set_table_styles([
-                            # {
-                            #     "selector":"thead",
-                            #     "props": [("background-color", "white"), ("color", "black"),
-                            #               ("border", "3px solid black")]
-                            # },
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
 
-                            {"selector":"caption",
-                            "props":[("text-align","center")]
+                        ], overwrite=False)\
+                        .set_caption('Table 1.')\
+                        .set_table_styles({"Time" : [
+                                        {
+                                            "selector" :"th",
+                                            "props": "background-color:lightgreen;"
+                                        }
+                                    ]
+                              }, overwrite=False)\
+                        .applymap(color_column, subset=['Time'])           
+                        )
 
 
-                            },
 
-                        ]).set_caption("Table 1: Dataset.").applymap(color_column, subset=['Time']) )
+
 
     st.markdown("""
                 In this dataset, the time variable reflects each moment an observation is recorded.
@@ -53,19 +59,21 @@ def return_sample_rate():
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
             }).style.set_table_styles([
-                            # {
-                            #     "selector":"thead",
-                            #     "props": [("background-color", "white"), ("color", "black"),
-                            #               ("border", "3px solid black")]
-                            # },
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
 
-                            {"selector":"caption",
-                            "props":[("text-align","center")]
-
-
-                            },
-
-                        ]).set_caption("Table 2: Dataset.").applymap(color_column, subset=['Time']) )
+                        ], overwrite=False)\
+                        .set_caption('Table 2.')\
+                        .set_table_styles({"Time" : [
+                                        {
+                                            "selector" :"th",
+                                            "props": "background-color:lightgreen;"
+                                        }
+                                    ]
+                              }, overwrite=False)\
+                        .applymap(color_column, subset=['Time'])           
+                        )
     
     # st.markdown('Which means that every 5 minutes your data is recorded.')
     
@@ -125,3 +133,44 @@ def return_sample_rate():
     with col2:
         st.dataframe(dataframe)
         st.table(df.round(2))
+
+
+
+
+
+
+
+## Combine multiple table styles
+
+    # with col2:
+    #     st.table(pd.DataFrame({
+    #             'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
+    #             'Sensor1': [10, 10, 11, 10],
+    #             'Sensor2': [14,15,14,14]
+    #         }).style.set_table_styles([
+    #                         {
+    #                             "selector":"thead",
+    #                             "props": [("background-color", "dodgerblue"), ("color", "white"),
+    #                                       ("border", "3px solid red"),
+    #                                       ("font-size", "2rem"), ("font-style", "italic")],
+      
+    #                         },
+    #                         {
+    #                             "selector":"th.row_heading",
+    #                             "props": [("background-color", "orange"), ("color", "green"),
+    #                                       ("border", "3px solid black"),
+    #                                       ("font-size", "2rem"), ("font-style", "italic")]
+    #                         },
+    #                        {"selector":"caption",
+    #                         "props":[("text-align","center")],
+    #                        }
+
+    #                     ], overwrite=False)\
+    #                     .set_caption('test')\
+    #                     .set_table_styles({"Time" : [
+    #                                     {
+    #                                         "selector" :"td",
+    #                                         "props": "border: 2px solid red; color:green; background-color:yellow;"
+    #                                     }
+    #                                 ]
+    #                           }, overwrite=False))
