@@ -47,13 +47,16 @@ og_set = set(data.index.to_list())
 new_set = set(df_filtered.index.tolist())
 og_set - new_set
 
-filtered_df_values = pd.DataFrame(data.loc[og_set - new_set])
+# filtered_df_values = pd.DataFrame(data.loc[og_set - new_set])
+filtered_df_values = pd.DataFrame(data.iloc[list(og_set - new_set),:])
+
 filtered_df_values = filtered_df_values.sort_values('datetime')
 # with pd.option_context('mode.chained_assignment', None):
     # data[data.bidder == 'parakeet2004']['bidderrate'] = 100
 filtered_df_values['identifier'] = 'r'
 final_df = df_filtered.combine_first(filtered_df_values)
 
+#%%
 
 #%%
 # fig2, ax = plt.subplots()

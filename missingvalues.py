@@ -28,7 +28,8 @@ def return_missing_values():
     dataframe["Time"] = pd.to_datetime(dataframe["Time"])
     dataframe["Time"] = dataframe["Time"].dt.strftime("%Y-%m-%d %H:%M:%S")
     
-    df_values = dataframe.rolling(2).mean() 
+    # df_values = dataframe.rolling(2).mean() 
+    df_values = dataframe.rolling(2, on='Time').mean()
     df = dataframe.iloc[::2, :]
     df['var1'] = df_values['var1']
     # df.drop('Measurement')

@@ -16,7 +16,7 @@ def return_column_names():
     st.title('Open the dataset in your program by choice. What do the variable names look like?')
     
     st.markdown("""
-    Notice the black bar highlighting the names of the variables.
+    Notice the black bar highlighting the names of the variables in Table 1.
     Take a look your dataset in your own program (SublimeTexts, Microsoft Excel).
     
     """)

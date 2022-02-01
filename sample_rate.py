@@ -135,7 +135,9 @@ def return_sample_rate():
     
     
     
-    st.error('Watch out if your data looks like the following:')
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ffdbdb; border-color: #ffdbdb;">
+                Watch out if your data looks like the following:
+                </div>""", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1,2.5,1])
 
     with col2:
@@ -176,7 +178,7 @@ def return_sample_rate():
            
             .to_html()           
             , unsafe_allow_html=True)
-    
+    st.markdown('')
     st.markdown("""
                 In this case, there is no notion of time. The only information available is the order of the observations.
                 In this case, we advice you to figure out what the sample rate of you dataset is. 
@@ -187,8 +189,11 @@ def return_sample_rate():
                 """)
     
     st.title('How to improve')
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ceeed8; border-color: #ceeed8;">
+                Tip 1: Calculate rolling average to smooth out observations
+                </div>""", unsafe_allow_html=True)
 
-    st.success('Tip 1: Calculate rolling average to smooth out observations')
+    # st.success('Tip 1: Calculate rolling average to smooth out observations')
     
     st.markdown("""
     Consider the following dataset where the Variable 'var1' measures a random variable that counts up.
@@ -205,18 +210,20 @@ def return_sample_rate():
     dataframe["Time"] = pd.to_datetime(dataframe["Time"])
     dataframe["Time"] = dataframe["Time"].dt.strftime("%Y-%m-%d %H:%M:%S")
     
-    df_values = dataframe.rolling(2).mean() 
+    # df_values = dataframe.rolling(2).mean() 
+    # df_values = dataframe.rolling(2).mean()
+    df_values = dataframe.rolling(2, on='Time').mean()
     df = dataframe.iloc[::2, :]
     df['var1'] = df_values['var1']
     df = df.iloc[1:,:]
     df['var1'] = ['2.5','4.5','6.5','8.5']
 
-    col1, col2, col3 = st.columns([1,2.5,1])
+    col1, col2, col3 = st.columns([1,5,1])
     
     with col2:            
         st.write(dataframe.style.set_table_styles([
                         {"selector":"caption",
-                        "props":[("text-align","center")],
+                        "props":[("text-align","center"),("caption-side","top")],
                         },
                         {"selector":"th",
                         "props":[("text-align","center")],
@@ -231,8 +238,8 @@ def return_sample_rate():
 
                         ], overwrite=False)\
 
-            .set_caption('Table 4.')\
-            .hide_index()\
+            .set_caption('Table 4: Measurements taken every minute.')\
+            # .hide_index()\
             .set_table_styles({"Time" : [
                             {
                                 "selector" :"th",
@@ -252,7 +259,7 @@ def return_sample_rate():
         st.markdown("")    
         st.write(df.style.set_table_styles([
                         {"selector":"caption",
-                        "props":[("text-align","center")],
+                        "props":[("text-align","center"),("caption-side","top")],
                         },
                         {"selector":"th",
                         "props":[("text-align","center")],
@@ -266,8 +273,8 @@ def return_sample_rate():
 
                         ], overwrite=False)\
 
-            .set_caption('Table 5.')\
-            .hide_index()\
+            .set_caption('Table 5: Average Taken of every 2 minutes.')\
+            # .hide_index()\
             .set_table_styles({"Time" : [
                             {
                                 "selector" :"th",
