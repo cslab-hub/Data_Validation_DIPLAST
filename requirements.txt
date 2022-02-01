@@ -4,5 +4,4 @@ streamlit==1.4.0
 sklearn
 matplotlib
 pandas==1.3.5
-seaborn
-# streamlit_option_menu
+dataprep

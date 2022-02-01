@@ -4,6 +4,15 @@ import numpy as np
 from PIL import Image 
 
 def return_column_names():
+
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    
     st.title('Open the dataset in your program by choice. What do the variable names look like?')
     
     st.markdown("""
@@ -24,6 +33,10 @@ def return_column_names():
                                 "selector":"thead",
                                 "props": [("background-color", "white"), ("color", "black"),
                                           ("border", "3px solid black")]
+                            },
+                            {
+                                "selector":"td",
+                                "props": [("text-align", "center")]
                             },
 
                             {"selector":"caption",
@@ -46,7 +59,18 @@ def return_column_names():
                 'Ex1Var2_02': [10.21, 10.33, 11.12, 10.87],
                 'Ex2Var25_i0': [11.21, 11.19, 11.15, 10.99],
                 'Ex2Var29_i2': [11.15, 11.10, 10.98, 11.03],
-            }).style.format('{:.2f}'))
+            }).style.set_table_styles([
+                           {'selector': 'thead',
+                            'props': [('text-align', 'center;'),("border", "3px solid black;")]
+                            },
+
+                            {"selector":"caption",
+                            "props":[("text-align","center;")],
+                            },
+
+                        ], overwrite=False)\
+                        .set_caption("Table 2: Random Dataset.")\
+                        .format(precision=2))
         
         st.subheader('Here are some tips to improve readability:')
         
@@ -79,7 +103,18 @@ def return_column_names():
                 'Heat_sensor2': [10.21, 10.33, 11.12, 10.87],
                 'Pressure_sensor1': [11.21, 11.19, 11.15, 10.99],
                 'Pressure_sensor2': [11.15, 11.10, 10.98, 11.03],
-            }).style.format('{:.2f}'))
+            }).style.set_table_styles([
+                           {'selector': 'thead',
+                            'props': [('text-align', 'center;'),("border", "3px solid black;")]
+                            },
+
+                            {"selector":"caption",
+                            "props":[("text-align","center;")],
+                            },
+
+                        ], overwrite=False)\
+                        .set_caption("Table 2: Random Dataset.")\
+                        .format(precision=2))
         
         st.success('Your column names are of great quality!')
         st.markdown("Your data contains easy to read variables and are interpretable for anybody.")
@@ -90,7 +125,18 @@ def return_column_names():
                 'Drehzalh02': [10.21, 10.33, 11.12, 10.87],
                 'Drehseth01': [11.21, 11.19, 11.15, 10.99],
                 'Drehseth02': [11.15, 11.10, 10.98, 11.03],
-            }).style.format('{:.2f}'))
+            }).style.set_table_styles([
+                           {'selector': 'thead',
+                            'props': [('text-align', 'center;'),("border", "3px solid black;")]
+                            },
+
+                            {"selector":"caption",
+                            "props":[("text-align","center;")],
+                            },
+
+                        ], overwrite=False)\
+                        .set_caption("Table 2: Random Dataset.")\
+                        .format(precision=2))
         
         st.warning('Your column are identifyable, but English names are easier to interpet')
 

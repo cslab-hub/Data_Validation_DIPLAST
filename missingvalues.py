@@ -6,7 +6,13 @@ from PIL import Image
 
 def return_missing_values():
     
-    
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
 
     st.title('It could occur that various variables did not measured all time points.')
@@ -45,7 +51,15 @@ def return_missing_values():
 
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df.style.highlight_null(null_color="tomato"))
+        st.table(inconsistent_df.style.highlight_null(null_color="tomato")\
+            .set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 1.'))
 
     col1, col2, col3 , col4, col5 = st.columns(5)
 
@@ -54,7 +68,14 @@ def return_missing_values():
     
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df.iloc[4:,:])
+        st.table(inconsistent_df.iloc[4:,:].style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 2.'))
 
 
     st.error('Bad Example 2: There are  various missing values scattered around your dataset.')
@@ -82,7 +103,15 @@ def return_missing_values():
 
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df.style.highlight_null(null_color="tomato"))
+        st.table(inconsistent_df.style.highlight_null(null_color="tomato")\
+            .set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 3.'))
 
 
     col1, col2, col3 , col4, col5 = st.columns(5)
@@ -94,4 +123,11 @@ def return_missing_values():
     with col2:
         inconsistent_df['var2'] = inconsistent_df['var2'].interpolate().astype(int)
         inconsistent_df['var3'] = inconsistent_df['var3'].interpolate().astype(int)
-        st.table(inconsistent_df)
+        st.table(inconsistent_df.style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 4.'))

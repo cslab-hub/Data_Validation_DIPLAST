@@ -6,6 +6,15 @@ from PIL import Image
 
 
 def return_descriptives():
+
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    
     st.title('Descriptives of your dataset')
     
     st.markdown("""
@@ -31,15 +40,17 @@ def return_descriptives():
     dataframe['var5'] = 'one'
     dataframe = dataframe[['Time','var2','var3','var4','var5']]
 
-    st.table(dataframe.style.set_table_styles([
-                            {
-                                "selector":"thead",
-                                "props": [("background-color", "white"), ("color", "blue"),
-                                        #   ("border", "3px solid black"),
-                                          ("font-size", "24px"), ("font-style", "italic")]
-                            },
+    col1, col2, col3 = st.columns([1,5,1])
 
-                        ]) )
+    with col2:
+        st.table(dataframe.style.set_table_styles([
+                                {"selector":"caption",
+                                "props":[("text-align","center")],
+                                }
+
+                                ], overwrite=False)\
+
+                .set_caption('Table 1.'))
 
 
     st.markdown("""
@@ -50,8 +61,17 @@ def return_descriptives():
                 Second, we can see that the Mean of Variable var2 is much higher than Var3 or var4. 
                 If this behavior is expected it is okay, but you should check every value to know what the variable represents.
                 """)
+    col1, col2, col3 = st.columns([1,5,1])
+    
+    with col2:
+        st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)).style.set_table_styles([
+                                {"selector":"caption",
+                                "props":[("text-align","center")],
+                                }
 
-    st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)))
+                                ], overwrite=False)\
+
+                .set_caption('Table 2.'))
 
 
     st.markdown("# Density plot of variables")
@@ -84,7 +104,14 @@ def return_descriptives():
                 In addition, 'var5' is measuring a word which does not resemble numbers. 
                 """)
 
-    st.table(dataframe.head(2))
+    st.table(dataframe.head(2).style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 3.'))
     dtype_df = dataframe.dtypes.value_counts().reset_index()
 
     dtype_df.columns = ['VariableType','Count']

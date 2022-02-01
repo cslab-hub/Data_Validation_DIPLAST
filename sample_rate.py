@@ -7,8 +7,21 @@ from PIL import Image
 
 def return_sample_rate():
     
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
     st.title('Determine the Sample Rate')
-    st.markdown("It is very likely that one of the first variables in your dataset looks like the following (highlighted in green):")
+    st.markdown("""
+    Now that we have determined sensible column names and reduced our dataset to a few variables, we can investigate other aspects of our data.
+    One of the first things to check is the sample rate of your dataset.
+    It is very likely that one of the first variables in your dataset looks like the following (highlighted in green):
+    
+    """)
     # st.markdown(<font color=‘red’>THIS TEXT WILL BE RED</font>, unsafe_allow_html=True)))
 
     def color_column(val):
@@ -19,69 +32,106 @@ def return_sample_rate():
     col1, col2, col3 = st.columns([1,5,1])
 
     with col2:
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
                 'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
             }).style.set_table_styles([
                         {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
                         ], overwrite=False)\
-                        .set_caption('Table 1.')\
-                        .set_table_styles({"Time" : [
-                                        {
-                                            "selector" :"th",
-                                            "props": "background-color:lightgreen;"
-                                        }
-                                    ]
-                              }, overwrite=False)\
-                        .applymap(color_column, subset=['Time'])           
-                        )
+
+            .set_caption('Table 1. Random Dataset where each second an observation is recorded.')\
+            .set_table_styles({"Time" : [
+                            {
+                                "selector" :"th",
+                                "props": "background-color:lightgreen;"
+                            },
+                            {
+                                "selector" :"td",
+                                "props": "background-color:lightgreen;"
+                            }
+                        ]
+                    }, overwrite=False)\
+            .to_html()           
+            , unsafe_allow_html=True)
 
 
 
 
-
+    st.markdown('')
     st.markdown("""
                 In this dataset, the time variable reflects each moment an observation is recorded.
                 This means that every second, each variable in your dataset takes a measurement.
-                \n
                 It could, however, also be the case that your data looks like the following, where every 5 minutes the data is recorded:
                 """)
     
     col1, col2, col3 = st.columns([1,2.5,1])
     
     with col2:
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
                 'Time': ['21-12-21 10:00:00', '21-12-21 10:05:00','21-12-21 10:10:00','21-12-21 10:15:00'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
             }).style.set_table_styles([
                         {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
                         ], overwrite=False)\
-                        .set_caption('Table 2.')\
-                        .set_table_styles({"Time" : [
-                                        {
-                                            "selector" :"th",
-                                            "props": "background-color:lightgreen;"
-                                        }
-                                    ]
-                              }, overwrite=False)\
-                        .applymap(color_column, subset=['Time'])           
-                        )
+
+            .set_caption('Table 2: Random dataset with a measure taken every 5 minutes.')\
+            # .hide_index()\
+            .set_table_styles({"Time" : [
+                            {
+                                "selector" :"th",
+                                "props": "background-color:lightgreen;"
+                            },
+                            {
+                                "selector" :"td",
+                                "props": "background-color:lightgreen;"
+                            }
+                        ]
+                    }, overwrite=False)\
+            # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
+           
+            .to_html()           
+            , unsafe_allow_html=True)
     
     # st.markdown('Which means that every 5 minutes your data is recorded.')
+    st.markdown("")
+    # st.warning('It depends on your goal wheter or not every second or every 5 minutes is prefered')
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #fef4d5; border-color: #fef4d5;">
+                It depends on your goal wheter or not every second or every 5 minutes is prefered
+                </div>""", unsafe_allow_html=True)
     
-    st.warning('It depends on your goal wheter or not every second or every 5 minutes is prefered')
-    
-    st.markdown('''For example, imagine that the dataset your interested in measures the total stock of a certain mateial.
-                It is ofcourse not neccesary to measure the total stock every second.
-                However, when the pressure or temperature in an Extruder is to be analysed, more observations help alot!''')
+    st.markdown("""
+                For example, imagine that the dataset your interested in measures the total stock of a certain material.
+                It is ofcourse not neccesary to measure the total stock every second, especially of your stock data only changes every few hours on average.
+                However, when the pressure or temperature in an Extruder is to be analysed, more observations help alot!
+                Therefore, you shoul talk with your IT department for the best sample rate for your analysis goals!
+                
+                """)
     
     
     
@@ -89,11 +139,43 @@ def return_sample_rate():
     col1, col2, col3 = st.columns([1,2.5,1])
 
     with col2:
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
                 'Time': ['0', '1','2','3'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
-            }).style.applymap(color_column, subset=['Time']))
+            }).style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 3: Dataset without any information about difference in time.')\
+            # .hide_index()\
+            .set_table_styles({"Time" : [
+                            {
+                                "selector" :"th",
+                                "props": "background-color:lightgreen;"
+                            },
+                            {
+                                "selector" :"td",
+                                "props": "background-color:lightgreen;"
+                            }
+                        ]
+                    }, overwrite=False)\
+            # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
+           
+            .to_html()           
+            , unsafe_allow_html=True)
     
     st.markdown("""
                 In this case, there is no notion of time. The only information available is the order of the observations.
@@ -130,13 +212,78 @@ def return_sample_rate():
     df['var1'] = ['2.5','4.5','6.5','8.5']
 
     col1, col2, col3 = st.columns([1,2.5,1])
-    with col2:
-        st.dataframe(dataframe)
-        st.table(df.round(2))
+    
+    with col2:            
+        st.write(dataframe.style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center")],
+                        },
+                        
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
+                        ], overwrite=False)\
 
+            .set_caption('Table 4.')\
+            .hide_index()\
+            .set_table_styles({"Time" : [
+                            {
+                                "selector" :"th",
+                                "props": "background-color:lightgreen;"
+                            },
+                            {
+                                "selector" :"td",
+                                "props": "background-color:lightgreen;"
+                            }
+                        ]
+                    }, overwrite=False)\
+            # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
+           
+            .to_html()           
+            , unsafe_allow_html=True)
 
+        st.markdown("")    
+        st.write(df.style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
+                        ], overwrite=False)\
+
+            .set_caption('Table 5.')\
+            .hide_index()\
+            .set_table_styles({"Time" : [
+                            {
+                                "selector" :"th",
+                                "props": "background-color:lightgreen;"
+                            },
+                            
+                            {
+                                "selector" :"td",
+                                "props": "background-color:lightgreen;"
+                            }
+                        ]
+                    }, overwrite=False)\
+            # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
+           
+            .to_html()           
+            , unsafe_allow_html=True)
 
 
 

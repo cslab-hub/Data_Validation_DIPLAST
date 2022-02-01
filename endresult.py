@@ -5,6 +5,14 @@ from PIL import Image
 
 def return_endresult():
     
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    
     st.title('End result')
 
     st.markdown("""

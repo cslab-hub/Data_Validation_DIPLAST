@@ -94,6 +94,15 @@ third_fig = first_plot(outliers_removed, 'Outliers Removed')
 #%%
 
 def return_outliers():
+
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    
     st.title('Outlier detection')
     
     st.markdown("""
@@ -101,7 +110,14 @@ def return_outliers():
                 """)
     
     col1, col2, col3 = st.columns([1,2.5,1])
-    col2.table(data.head(10))
+    col2.table(data.head(10).style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 1.'))
 
     st.markdown("""
                 It is hard to spot wether something is wrong with this dataset by looking at it in a table manner. 

@@ -4,6 +4,15 @@ import numpy as np
 from PIL import Image 
 
 def return_file_format():
+
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    
     st.title('What is the file format of your data?')
 
     st.markdown("""
@@ -28,7 +37,19 @@ def return_file_format():
         st.table(pd.DataFrame({
             'Sensor1': [1.21, 1.25, 1.31, 1.27],
             'Sensor2': [10.21, 10.33, 11.12, 10.87]
-        }).style.format('{:.2f}'))
+        }).style.set_table_styles([
+                           
+
+                            {"selector":"caption",
+                            "props":[("text-align","center")]
+
+
+                            },
+
+                        ]
+                        ).set_caption("Table 1: Dataset.")\
+                        .format(precision=2)     )
+
         
         st.warning('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2. That makes it easier to process the data in software since they assume a comma as the seperator between values.')
         
@@ -51,21 +72,33 @@ def return_file_format():
         These files are just plain text files that store your data, which can be very easily used in programming languages to manipulate them.
         
         """)
-
+        
         st.table(pd.DataFrame({
             'Sensor1': [1.21, 1.25, 1.31, 1.27],
             'Sensor2': [10.21, 10.33, 11.12, 10.87]
-        }).style.format('{:.2f}'))
+        }).style.set_table_styles([
+                           
+
+                            {"selector":"caption",
+                            "props":[("text-align","center")]
+
+
+                            },
+
+                        ]
+                        ).set_caption("Table 2: Dataset.")\
+                        .format(precision=2)     )
 
         st.markdown("""
         This dataset is simply stored in a .csv file that looks like the following:
         """)
 
         code = '''
-        1.21, 10.21,
-        1.25, 10.33,
-        1.31, 11.12,
-        1.27, 10.87'''
+1.21, 10.21,
+1.25, 10.33,
+1.31, 11.12,
+1.27, 10.87
+        '''
         st.code(code, language='csv')
 
             
