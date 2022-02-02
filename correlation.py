@@ -101,7 +101,7 @@ def return_correlation():
         'Select how many monents in time to look back:',
         1, 6)
 
-
+#
     ts_df = pd.DataFrame(columns=['t2', 't1'], data=zip(t2,t1))
     gc_res = grangercausalitytests(ts_df, selection_taken)
     for i,j in enumerate(gc_res.values()):
