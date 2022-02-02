@@ -5,13 +5,13 @@ from PIL import Image
 
 def return_column_names():
 
-    hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    # hide_table_row_index = """
+    #         <style>
+    #         tbody th {display:none}
+    #         .blank {display:none}
+    #         </style>
+    #         """
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
     
     st.title('Open the dataset in your program by choice. What do the variable names look like?')
     
@@ -24,29 +24,28 @@ def return_column_names():
     col1, col2, col3 = st.columns([1,2.5,1])
 
     with col2:
-         st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
                 'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
                 'Sensor1': [10, 10, 11, 10],
                 'Sensor2': [14,15,14,14]
             }).style.set_table_styles([
-                            {
-                                "selector":"thead",
-                                "props": [("background-color", "white"), ("color", "black"),
-                                          ("border", "3px solid black")]
-                            },
-                            {
-                                "selector":"td",
-                                "props": [("text-align", "center")]
-                            },
-
                             {"selector":"caption",
-                            "props":[("text-align","center")]
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center"),("border","3px solid black")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
-
-                            },
-
-                        ]).set_caption("Table 1: Dataset.") )
-
+                        ]).set_caption("Table 1: Dataset.")\
+                        .hide_index()\
+                        .to_html()           
+                        , unsafe_allow_html=True)
 
 
     option = st.selectbox(

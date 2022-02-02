@@ -7,13 +7,13 @@ from PIL import Image
 
 def return_descriptives():
 
-    hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    # hide_table_row_index = """
+    #         <style>
+    #         tbody th {display:none}
+    #         .blank {display:none}
+    #         </style>
+    #         """
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
     
     st.title('Descriptives of your dataset')
     
@@ -43,14 +43,49 @@ def return_descriptives():
     col1, col2, col3 = st.columns([1,5,1])
 
     with col2:
-        st.table(dataframe.style.set_table_styles([
-                                {"selector":"caption",
-                                "props":[("text-align","center")],
-                                }
+        # st.table(dataframe.style.set_table_styles([
+        #                         {"selector":"caption",
+        #                         "props":[("text-align","center")],
+        #                         }
 
-                                ], overwrite=False)\
+        #                         ], overwrite=False)\
 
-                .set_caption('Table 1.'))
+        #         .set_caption('Table 1.'))
+
+        st.write(dataframe.style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center")],
+                        },
+                        
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 1: Sample dataset.')\
+            .hide_index()\
+            .set_table_styles({"Time" : [
+                            {
+                                "selector" :"th",
+                                "props": "background-color:lightgreen;"
+                            },
+                            {
+                                "selector" :"td",
+                                "props": "background-color:lightgreen;"
+                            }
+                        ]
+                    }, overwrite=False)\
+            # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
+           
+            .to_html()           
+            , unsafe_allow_html=True)
 
 
     st.markdown("""
@@ -64,14 +99,49 @@ def return_descriptives():
     col1, col2, col3 = st.columns([1,5,1])
     
     with col2:
-        st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)).style.set_table_styles([
-                                {"selector":"caption",
-                                "props":[("text-align","center")],
-                                }
+        # st.table(dataframe.describe().apply(lambda s: s.apply('{0:.2f}'.format)).style.set_table_styles([
+        #                         {"selector":"caption",
+        #                         "props":[("text-align","center")],
+        #                         }
 
-                                ], overwrite=False)\
+        #                         ], overwrite=False)\
 
-                .set_caption('Table 2.'))
+        #         .set_caption('Table 2.'))
+
+        st.write(dataframe.describe().style.set_table_styles([
+                        {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center")],
+                        },
+                        
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
+
+                        ], overwrite=False)\
+
+            .set_caption('Table 2: Descriptives of the dataset.')\
+            # .hide_index()\
+            # .set_table_styles({"Time" : [
+            #                 {
+            #                     "selector" :"th",
+            #                     "props": "background-color:lightgreen;"
+            #                 },
+            #                 {
+            #                     "selector" :"td",
+            #                     "props": "background-color:lightgreen;"
+            #                 }
+            #             ]
+            #         }, overwrite=False)\
+            # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
+           
+            .to_html()           
+            , unsafe_allow_html=True)
 
 
     st.markdown("# Density plot of variables")
@@ -104,14 +174,50 @@ def return_descriptives():
                 In addition, 'var5' is measuring a word which does not resemble numbers. 
                 """)
 
-    st.table(dataframe.head(2).style.set_table_styles([
+    # st.table(dataframe.head(2).style.set_table_styles([
+    #                     {"selector":"caption",
+    #                     "props":[("text-align","center")],
+    #                     }
+
+    #                     ], overwrite=False)\
+
+    #         .set_caption('Table 3.'))
+
+    st.write(dataframe.head(2).style.set_table_styles([
                         {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
                         ], overwrite=False)\
 
-            .set_caption('Table 3.'))
+            .set_caption('Table 3: Sample dataset.')\
+            .hide_index()\
+            .set_table_styles({"Time" : [
+                            {
+                                "selector" :"th",
+                                "props": "background-color:lightgreen;"
+                            },
+                            {
+                                "selector" :"td",
+                                "props": "background-color:lightgreen;"
+                            }
+                        ]
+                    }, overwrite=False)\
+            # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
+           
+            .to_html()           
+            , unsafe_allow_html=True)
+
     dtype_df = dataframe.dtypes.value_counts().reset_index()
 
     dtype_df.columns = ['VariableType','Count']

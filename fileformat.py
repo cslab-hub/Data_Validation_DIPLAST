@@ -34,21 +34,27 @@ def return_file_format():
         st.success('You have an ideal data format!')
         "CSV files are structured in a [row, column] manner and are easy to work with."
         
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
             'Sensor1': [1.21, 1.25, 1.31, 1.27],
             'Sensor2': [10.21, 10.33, 11.12, 10.87]
         }).style.set_table_styles([
-                           
-
                             {"selector":"caption",
-                            "props":[("text-align","center")]
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
-
-                            },
-
-                        ]
-                        ).set_caption("Table 1: Dataset.")\
-                        .format(precision=2)     )
+                        ]).set_caption("Table 1: Dataset.")\
+                        .hide_index()\
+                        .to_html()           
+                        , unsafe_allow_html=True)
 
         
         st.warning('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2. That makes it easier to process the data in software since they assume a comma as the seperator between values.')
@@ -73,21 +79,27 @@ def return_file_format():
         
         """)
         
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
             'Sensor1': [1.21, 1.25, 1.31, 1.27],
             'Sensor2': [10.21, 10.33, 11.12, 10.87]
         }).style.set_table_styles([
-                           
-
                             {"selector":"caption",
-                            "props":[("text-align","center")]
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
-
-                            },
-
-                        ]
-                        ).set_caption("Table 2: Dataset.")\
-                        .format(precision=2)     )
+                        ]).set_caption("Table 2: Dataset.")\
+                        .hide_index()\
+                        .to_html()           
+                        , unsafe_allow_html=True)
 
         st.markdown("""
         This dataset is simply stored in a .csv file that looks like the following:

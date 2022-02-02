@@ -6,13 +6,13 @@ from PIL import Image
 
 def return_missing_values():
     
-    hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    # hide_table_row_index = """
+    #         <style>
+    #         tbody th {display:none}
+    #         .blank {display:none}
+    #         </style>
+    #         """
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
 
     st.title('It could occur that various variables did not measured all time points.')
@@ -46,37 +46,77 @@ def return_missing_values():
     """)
     inconsistent_df = dataframe.copy(deep = True)
     inconsistent_df['var2'] = [np.nan, np.nan, np.nan,"4","5","6","7","8","9"]
+    inconsistent_df['var2'] = [np.nan, np.nan, np.nan,4,5,6,7,8,9]
+
     inconsistent_df['var3'] = [np.nan,np.nan,np.nan,np.nan,"5","6","7","8","9"]
+    inconsistent_df['var3'] = [np.nan,np.nan,np.nan,np.nan,5,6,7,8,9]
+
 
     image = Image.open('images/down-arrow.png')
 
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df.style.highlight_null(null_color="tomato")\
-            .set_table_styles([
+        # st.table(inconsistent_df.style.highlight_null(null_color="tomato")\
+        #     .set_table_styles([
+        #                 {"selector":"caption",
+        #                 "props":[("text-align","center")],
+        #                 }
+
+        #                 ], overwrite=False)\
+
+        #     .set_caption('Table 1.'))
+
+        st.write(inconsistent_df.style.set_table_styles([
                         {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
-                        ], overwrite=False)\
-
-            .set_caption('Table 1.'))
+                        ]).highlight_null(null_color='tomato').format(precision=0)\
+                        .set_caption("Table 1: Dataset with non-random numbers.")\
+                        .hide_index()\
+                        .to_html()\
+                        # .highlight_null(null_color='tomato')
+                        , unsafe_allow_html=True)
 
     col1, col2, col3 , col4, col5 = st.columns(5)
 
     with col3 :
         st.image(image, width =75)
+
+        html_string = """<img src="images/down-arrow.png" alt="Mountain">"""
+        st.write(html_string, unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df.iloc[4:,:].style.set_table_styles([
+        st.write(inconsistent_df.iloc[4:,:].style.set_table_styles([
                         {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
-                        ], overwrite=False)\
-
-            .set_caption('Table 2.'))
+                        ]).highlight_null(null_color='tomato').format(precision=0)\
+                        .set_caption("Table 2: Dataset with missing measurements removed.")\
+                        .hide_index()\
+                        .to_html()\
+                        # .highlight_null(null_color='tomato')
+                        , unsafe_allow_html=True)
 
 
     st.error('Bad Example 2: There are  various missing values scattered around your dataset.')
@@ -104,15 +144,36 @@ def return_missing_values():
 
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
-        st.table(inconsistent_df.style.highlight_null(null_color="tomato")\
-            .set_table_styles([
+        # st.table(inconsistent_df.style.highlight_null(null_color="tomato")\
+        #     .set_table_styles([
+        #                 {"selector":"caption",
+        #                 "props":[("text-align","center")],
+        #                 }
+
+        #                 ], overwrite=False)\
+
+        #     .set_caption('Table 3.'))
+
+        st.write(inconsistent_df.style.set_table_styles([
                         {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
-                        ], overwrite=False)\
-
-            .set_caption('Table 3.'))
+                        ]).highlight_null(null_color='tomato').format(precision=0)\
+                        .set_caption("Table 3: Dataset with random numbers missing.")\
+                        .hide_index()\
+                        .to_html()\
+                        # .highlight_null(null_color='tomato')
+                        , unsafe_allow_html=True)
 
 
     col1, col2, col3 , col4, col5 = st.columns(5)
@@ -124,11 +185,32 @@ def return_missing_values():
     with col2:
         inconsistent_df['var2'] = inconsistent_df['var2'].interpolate().astype(int)
         inconsistent_df['var3'] = inconsistent_df['var3'].interpolate().astype(int)
-        st.table(inconsistent_df.style.set_table_styles([
+        # st.table(inconsistent_df.style.set_table_styles([
+        #                 {"selector":"caption",
+        #                 "props":[("text-align","center")],
+        #                 }
+
+        #                 ], overwrite=False)\
+
+        #     .set_caption('Table 4.'))
+
+        st.write(inconsistent_df.style.set_table_styles([
                         {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
-                        ], overwrite=False)\
-
-            .set_caption('Table 4.'))
+                        ]).highlight_null(null_color='tomato').format(precision=0)\
+                        .set_caption("Table 4: Dataset the measurements imputed.")\
+                        .hide_index()\
+                        .to_html()\
+                        # .highlight_null(null_color='tomato')
+                        , unsafe_allow_html=True)

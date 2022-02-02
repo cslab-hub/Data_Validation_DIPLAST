@@ -98,13 +98,13 @@ third_fig = first_plot(outliers_removed, 'Outliers Removed')
 
 def return_outliers():
 
-    hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    # hide_table_row_index = """
+    #         <style>
+    #         tbody th {display:none}
+    #         .blank {display:none}
+    #         </style>
+    #         """
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
     
     st.title('Outlier detection')
     
@@ -113,14 +113,24 @@ def return_outliers():
                 """)
     
     col1, col2, col3 = st.columns([1,2.5,1])
-    col2.table(data.head(10).style.set_table_styles([
-                        {"selector":"caption",
+    col2.write(data.head(10).style.set_table_styles([
+                            {"selector":"caption",
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"th",
                         "props":[("text-align","center")],
+                        },
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
                         }
 
-                        ], overwrite=False)\
-
-            .set_caption('Table 1.'))
+                        ]).set_caption("Table 1: Dataset with random numbers.")\
+                        .hide_index()\
+                        .to_html()           
+                        , unsafe_allow_html=True)
 
     st.markdown("""
                 It is hard to spot wether something is wrong with this dataset by looking at it in a table manner. 
