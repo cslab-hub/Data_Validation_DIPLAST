@@ -15,6 +15,10 @@ def return_sample_rate():
             """
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
+
+    html_arrow = """<p style="text-align:center"><img src="https://github.com/cslab-hub/Data_Validation_DIPLAST/blob/main/images/down-arrow.png?raw=true" width="50"></p>"""
+
+
     st.title('Determine the Sample Rate')
     st.markdown("""
     Now that we have determined sensible column names and reduced our dataset to a few variables, we can investigate other aspects of our data.
@@ -64,7 +68,8 @@ def return_sample_rate():
                             }
                         ]
                     }, overwrite=False)\
-            .to_html()           
+            .to_html()\
+            # .hide_index()
             , unsafe_allow_html=True)
 
 
@@ -256,7 +261,11 @@ def return_sample_rate():
             .to_html()           
             , unsafe_allow_html=True)
 
-        st.markdown("")    
+        st.markdown("")  
+
+        st.markdown('')
+        st.write(html_arrow, unsafe_allow_html=True)
+
         st.write(df.style.set_table_styles([
                         {"selector":"caption",
                         "props":[("text-align","center"),("caption-side","top")],

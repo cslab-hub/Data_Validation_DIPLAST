@@ -90,10 +90,11 @@ def return_missing_values():
     col1, col2, col3 , col4, col5 = st.columns(5)
 
     with col3 :
-        st.image(image, width =75)
+        st.markdown('')
+        # st.image(image, width =75)
 
-        html_string = """<img src="images/down-arrow.png" alt="Mountain">"""
-        st.write(html_string, unsafe_allow_html=True)
+        html_arrow = """<p style="text-align:center"><img src="https://github.com/cslab-hub/Data_Validation_DIPLAST/blob/main/images/down-arrow.png?raw=true" width="50"></p>"""
+        st.write(html_arrow, unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
@@ -179,7 +180,8 @@ def return_missing_values():
     col1, col2, col3 , col4, col5 = st.columns(5)
 
     with col3 :
-        st.image(image, width =75)
+        st.markdown('')
+        st.write(html_arrow, unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1,6,1])
     with col2:
