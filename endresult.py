@@ -15,12 +15,15 @@ def return_endresult():
     
     st.title('End result')
 
-    st.markdown("""
-    If everything went well, you should now have a dataset that looks like the following:
-    """)
+    path = 'data/delimiter_tests/turbine_semicolon.csv'
+    import csv
+    def get_delimiter(file_path, bytes = 4096):
+        sniffer = csv.Sniffer()
+        data = open(file_path, "r").read(bytes)
+        delimiter = sniffer.sniff(data).delimiter
+        return delimiter
 
-    st.table(pd.DataFrame({
-                'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
-                'Temperature_Sensor1': [10, 10, 11, 10],
-                'Pressure_Sensor1': [14,15,14,14]
-            }))
+    st.write('delimiter used in this file was automatically detected and determined on = ',get_delimiter(path))
+
+    dataset = pd.read_csv(path,delimiter=get_delimiter(path))
+    st.dataframe(dataset)
