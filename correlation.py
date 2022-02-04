@@ -139,7 +139,7 @@ def return_correlation():
     # Drop ControlBoxTemperature column because it doesn't add much
     df.drop('ControlBoxTemperature', axis=1, inplace=True)
 
-    st.dataframe(df.head(40))
+    # st.dataframe(df.head(40))
     all_values = df.copy()
 
     features = ['WindSpeed', 'RotorRPM', 'ReactivePower', 'GeneratorWinding1Temperature', 
@@ -149,6 +149,7 @@ def return_correlation():
     y = all_values['ActivePower']
     X = all_values[features]
 
+    st.dataframe(X.head(40))
     print(y.shape)
     print(X.shape)
 
@@ -160,11 +161,13 @@ def return_correlation():
 
     def pcaplotter():
         fig, ax = plt.subplots(figsize=(8,3))
-        
+        # max_bins = int(max(ax.get_xlim()) + 2)
+        # print('max bins = ',max_bins)
         plt.plot(np.cumsum(pca.explained_variance_ratio_))
-        # ax.set_xticks([0,1,2,3,4,5,6])
+        # ax.set_xticks([i for i in range(1,max(ax.get_xlim())+2)])
+        # ax.set_xticks([i for i in range(1,max_bins,1)])
         # ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-        plt.gca().locator_params(nbins=max(ax.get_xlim())+1)
+        plt.gca().locator_params(nbins=max(ax.get_xlim())+2)
         plt.xlabel('number of components')
         plt.ylabel('cumulative explained variance')
 
@@ -176,7 +179,7 @@ def return_correlation():
     # pca = PCA(num_components)  
     # X_pca = pca.fit_transform(X_std) # fit and reduce dimension
     # print(pca.n_components_)
-    aim_target = st.slider('How much variance should be explained?', min_value=0.8, max_value=1.0, step=0.01)
+    aim_target = st.slider('How much variance should be explained?', min_value=0.8, max_value=1.0, step=0.01, value=0.9)
     pca = PCA(n_components = aim_target)
     X_pca = pca.fit_transform(X_std) # this will fit and reduce dimensions
     # st.markdown(f'{pca.n_components_}') # one can print and see how many components are selected. In this case it is 4 same as above we saw in step 5
@@ -190,4 +193,7 @@ def return_correlation():
     initial_feature_names = X.columns
     # get the most important feature names
     most_important_names = [initial_feature_names[most_important[i]] for i in range(n_pcs)]
-    st.markdown(f'{most_important_names}')
+    # st.markdown(f'The most outstanding variables in your dataset are in order from important to less important: {most_important_names}')
+
+    for i,j in enumerate(most_important_names):
+        st.write(f"{i + 1}th moth important variable = {most_important_names[i]}")
