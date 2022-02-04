@@ -108,9 +108,32 @@ def return_outliers():
     
     st.title('Outlier detection')
     
+    st.markdown('''
+    Finding outliers in time series means identifying unexpected or weird instances in your dataset.
+    When considering data from a machine (time series data), there are a few categories:
+
+    - Point-wise Outliers
+    - Pattern-wise Outliers
+    - System-wise Outliers
+    ''')
+
+    st.markdown('### Point-wise Outliers')
+
     st.markdown("""
-                Imagine you have a dataset with the following data:\n              
+    These outliers occur when small weird instances happen in a process.
+    These errors mostly consist of one or more single instances that deviate from the rest of the data entirely or from its direct neighbours.
+    Techniques to spot them are via checking them against the distribution of a variable, or locally by looking at its direct neighbours.
+
+
+    As an example, Imagine you have a dataset with the following data:\n              
                 """)
+
+    st.markdown('### Pattern-wise Outliers')
+    st.markdown('''
+    Pattern-wise outliers always consist of a subsequence of observations in your data that behave differently.
+    So instead of a few observations, pattern-wise outliers could consists of 100 observations that deviate.
+    
+    ''')
     
     col1, col2, col3 = st.columns([1,2.5,1])
     col2.write(data.head(10).style.set_table_styles([
@@ -128,6 +151,7 @@ def return_outliers():
                         }
 
                         ]).set_caption("Table 1: Dataset with random numbers.")\
+                        .format(precision=2)\
                         .hide_index()\
                         .to_html()           
                         , unsafe_allow_html=True)

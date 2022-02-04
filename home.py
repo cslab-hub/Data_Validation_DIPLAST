@@ -32,12 +32,11 @@ def return_homepage():
 
                 """)
 
-
     st.markdown("""
-    
-    Credits to all visuals used in this tool:
+        Credits to all visuals used in this tool:
     <div>Icons made by <a href="https://www.flaticon.com/authors/roundicons-premium" title="Roundicons Premium">Roundicons Premium</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    
-    
     """,  unsafe_allow_html=True)
+
+    # st.write("""<p style=" position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">Please wait a moment and you will be redirected to the forums.</p>""", unsafe_allow_html=True)
+    st.write("""<footer>  The Text which we want to insert in footer.  </footer>   """, unsafe_allow_html=True)
 
