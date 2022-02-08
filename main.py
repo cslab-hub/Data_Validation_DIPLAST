@@ -33,7 +33,7 @@ st.sidebar.markdown("Each chapter explains a different aspect of validating your
 
 add_selectbox = st.sidebar.radio(
     "Choose a chapter:",
-    ("Home","Chapter 1: File Format","Chapter 2: Text Editors" ,"Chapter 3: Column Names", "Chapter 4: Amount of Variables","Chapter 5: Sample Rate","Chapter 6: Descriptives","Chapter 7: Outliers","Chapter 8: Missing Values & Data Imputation","Chapter 9: Feature Selection","Chapter 10: End Result"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
+    ("Home","Chapter 1: File Format","Chapter 2: Column Names", "Chapter 3: Amount of Variables","Chapter 4: Sample Rate","Chapter 5: Descriptives","Chapter 6: Outliers","Chapter 7: Missing Values & Data Imputation","Chapter 8: Feature Selection","Chapter 9: End Result"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
     
 )  
 
@@ -48,33 +48,33 @@ if add_selectbox == 'Home':
 if add_selectbox == 'Chapter 1: File Format':
     return_file_format()
   
-if add_selectbox == 'Chapter 2: Text Editors':
-    return_texteditors()
+# if add_selectbox == 'Chapter 2: Text Editors':
+#     return_texteditors()
         
-if add_selectbox == 'Chapter 3: Column Names':
+if add_selectbox == 'Chapter 2: Column Names':
     return_column_names()
 
-if add_selectbox == 'Chapter 4: Amount of Variables':
+if add_selectbox == 'Chapter 3: Amount of Variables':
     return_number_of_variables()
         
-if add_selectbox == 'Chapter 5: Sample Rate':
+if add_selectbox == 'Chapter 4: Sample Rate':
     return_sample_rate()
     
     
     
-if add_selectbox == 'Chapter 6: Descriptives':
+if add_selectbox == 'Chapter 5: Descriptives':
     return_descriptives()
     
-if add_selectbox == 'Chapter 7: Outliers':
+if add_selectbox == 'Chapter 6: Outliers':
     return_outliers()
 
-if add_selectbox == 'Chapter 8: Missing Values & Data Imputation':
+if add_selectbox == 'Chapter 7: Missing Values & Data Imputation':
     return_missing_values()
 
-if add_selectbox == 'Chapter 9: Feature Selection':
+if add_selectbox == 'Chapter 8: Feature Selection':
     return_feature_selection()
 
-if add_selectbox == 'Chapter 10: End Result':
+if add_selectbox == 'Chapter 9: End Result':
     return_endresult()
 # This removes the copyright of how the page is made
 hide_st_style = """

@@ -15,21 +15,34 @@ data.to_csv('data/anomaly.csv', index=None)
 def first_plot(data, title):
     # fig = plt.figure()
 
-    fig, ax = plt.subplots(figsize=(8,3))
+    fig, ax = plt.subplots(figsize=(16,6))
     # ax.plot(data['value'])
 
-    plt.scatter(data.index, data['value'], c='b', s=15)
-    plt.plot(data.index, data['value'])
+    plt.scatter(data.index, data['value'], c='b', s=75)
+    plt.plot(data.index, data['value'], linewidth=3)
     plt.title(title)
     plt.xlabel("Time")
     plt.ylabel("Value")
 
     plt.ylim([-0.1,3.1])
+
+    plt.title(title, fontsize=24)
+    plt.xlabel("Time (seconds)", fontsize=22)
+    plt.ylabel("Value", fontsize=22)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+
+    for axis in ['top','bottom','left','right']:
+        ax.spines[axis].set_linewidth(1.5)
+        ax.spines[axis].set_color("black")
+        ax.spines[axis].set_zorder(0)
+    ax.tick_params('both', length=10, width=2, which='major')
+
     return fig
 
 # fig, ax = plt.subplots()
 # ax.plot(data['value'])
-fig1 = first_plot(data, 'Plotted Data')
+fig1 = first_plot(data, 'Figure 1: Plotted Data')
 #
 # new plot with anomalies
 #%%
@@ -40,6 +53,7 @@ q_hi  = data["value"].quantile(0.95)
 df_filtered = data[(data["value"] < q_hi) & (data["value"] > q_low)]
 with pd.option_context('mode.chained_assignment', None):
     df_filtered['identifier'] = 'b'
+
 
 #%%
 ##
@@ -57,7 +71,19 @@ filtered_df_values['identifier'] = 'r'
 final_df = df_filtered.combine_first(filtered_df_values)
 
 #%%
+final_df['value_grp'] = (final_df['value'].diff(1) != 0).astype('int')
+# final_df.plot(x='datetime',y='value_grp')
+# final_df[final_df['value_grp'] == 0, 'value_grp'] = 'r'
+final_df.loc[final_df["value_grp"] == 0, "value_grp"] = 'r'
+final_df.loc[final_df["value_grp"] == 1, "value_grp"] = 'b'
 
+# final_df.loc[final_df["value_grp_seq"] == 0, "value_grp"] = 'b'
+# final_df.loc[final_df["value_grp_seq"] == 1, "value_grp"] = 'r'
+
+# print( 'value counts = ',final_df['value_grp_seq'].value_counts())
+final_df.iloc[78:88,3] = 'r'
+
+final_df.iloc[78:90,:]
 #%%
 # fig2, ax = plt.subplots()
 
@@ -76,24 +102,69 @@ final_df = df_filtered.combine_first(filtered_df_values)
 # plt.ylabel("Value")
 # plt.show()
 
-def outlier_spotter():
+def outlier_spotter(title_set):
     # fig = plt.figure()
-    fig3, ax = plt.subplots(figsize=(8,3))
-    plt.scatter(final_df.index, final_df['value'],c=final_df['identifier'], s=15)
-    plt.plot(final_df.index, final_df['value'])
-    plt.title("Spotted Outliers")
+    fig3, ax = plt.subplots(figsize=(16,6))
+    plt.scatter(final_df.index, final_df['value'],c=final_df['identifier'], s=75)
+    plt.plot(final_df.index, final_df['value'], linewidth=3)
+    plt.title("Figure 2: Spotted Outliers")
     plt.xlabel("Time")
     plt.ylabel("Value")
+
+    plt.title(title_set, fontsize=24)
+    plt.xlabel("Time (seconds)", fontsize=22)
+    plt.ylabel("Value", fontsize=22)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+
+    for axis in ['top','bottom','left','right']:
+        ax.spines[axis].set_linewidth(1.5)
+        ax.spines[axis].set_color("black")
+        ax.spines[axis].set_zorder(0)
+    ax.tick_params('both', length=10, width=2, which='major')
+
     return fig3
 
-first_fig = outlier_spotter()
+first_fig = outlier_spotter(title_set="Figure 2: Spotted Point-Wise Outliers")
 
 
 #%%
 outliers_removed = final_df.copy(deep=True)
 
 outliers_removed = outliers_removed[outliers_removed['identifier'] == 'b']
-third_fig = first_plot(outliers_removed, 'Outliers Removed')
+third_fig = first_plot(outliers_removed, 'Figure 3: Outliers Removed')
+#%%
+def pattern_wise_plot(title_set):
+    # fig = plt.figure()
+    fig4, ax = plt.subplots(figsize=(16,6))
+    plt.scatter(final_df.index, final_df['value'],c=final_df['value_grp'], s=75)
+    plt.plot(final_df.index, final_df['value'], linewidth=3)
+    # plt.title("Figure 4: Spotted Pattern-Wise Outliers")
+    plt.xlabel("Time")
+    plt.ylabel("Value")
+
+    plt.title(title_set, fontsize=24)
+    plt.xlabel("Time (seconds)", fontsize=22)
+    plt.ylabel("Value", fontsize=22)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+
+    for axis in ['top','bottom','left','right']:
+        ax.spines[axis].set_linewidth(1.5)
+        ax.spines[axis].set_color("black")
+        ax.spines[axis].set_zorder(0)
+    ax.tick_params('both', length=10, width=2, which='major')
+
+    return fig4
+
+pattern_wise_fig = pattern_wise_plot(title_set="Figure 4: Spotted Pattern-Wise Outliers")
+
+# outliers_removed = final_df.copy(deep=True)
+
+pattern_wise_df = final_df[final_df['value_grp'] == 'b']
+pattern_wise_figure_2 = first_plot(pattern_wise_df, 'Figure 5: Pattern-Wise Outliers Removed')
+
+# final_df.iloc[78:90,:]
 #%%
 
 def return_outliers():
@@ -128,12 +199,6 @@ def return_outliers():
     As an example, Imagine you have a dataset with the following data:\n              
                 """)
 
-    st.markdown('### Pattern-wise Outliers')
-    st.markdown('''
-    Pattern-wise outliers always consist of a subsequence of observations in your data that behave differently.
-    So instead of a few observations, pattern-wise outliers could consists of 100 observations that deviate.
-    
-    ''')
     
     col1, col2, col3 = st.columns([1,2.5,1])
     col2.write(data.head(10).style.set_table_styles([
@@ -185,5 +250,57 @@ def return_outliers():
 
     
 
-
+    st.markdown('### Pattern-wise Outliers')
+    st.markdown('''
+    Pattern-wise outliers always consist of a subsequence of observations in your data that behave differently.
+    So instead of a few observations, pattern-wise outliers could consists of 100 observations that deviate.
     
+    ''')
+    
+    st.pyplot(pattern_wise_fig)
+    st.pyplot(pattern_wise_figure_2)
+
+
+    st.markdown('### System-wise Outliers')
+    st.markdown('''
+    System-wise outliers are only visible when compared against other variables in it's 'system'.
+    For example, the following plot shows one 'ideal' variable colored in blue, and two variables (in green and orange) that have a more chaotic nature.
+
+    ''')
+    t = np.linspace(0.0, 19, 100)       # time axis
+    sig = np.sin(t)
+    # random.uniform(0, 1)
+    import random
+    from matplotlib.ticker import MaxNLocator
+    sig2 = [i + random.uniform(0, 0.3) for i in sig]
+    sig3 = [i - random.uniform(0, 0.3) for i in sig]
+
+    def system_wise_plot():
+        # fig = plt.figure()
+        fig5, ax = plt.subplots(figsize=(16,6))
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        t = np.linspace(0, 19, 100)       # time axis
+        sig = np.sin(t)
+        # random.uniform(0, 1)
+        sig2 = [i + random.uniform(0, 0.3) for i in sig]
+        sig3 = [i - random.uniform(0, 0.3) for i in sig]
+
+        plt.plot(t,sig, linewidth=3)
+        plt.plot(t,sig2,linewidth=3)
+        plt.plot(t,sig3,linewidth=3)
+        plt.title("Figure 6: Spotted System-Wise Outliers", fontsize=24)
+        plt.xlabel("Time (seconds)", fontsize=22)
+        plt.ylabel("Value", fontsize=22)
+        plt.xticks(fontsize=20)
+        plt.yticks(fontsize=20)
+
+        for axis in ['top','bottom','left','right']:
+            ax.spines[axis].set_linewidth(1.5)
+            ax.spines[axis].set_color("black")
+            ax.spines[axis].set_zorder(0)
+        ax.tick_params('both', length=10, width=2, which='major')
+
+        return fig5
+
+    system_wise_plot_fig = system_wise_plot()
+    st.pyplot(system_wise_plot_fig)

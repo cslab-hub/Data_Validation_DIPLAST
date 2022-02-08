@@ -143,7 +143,7 @@ def return_sample_rate():
     st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ffdbdb; border-color: #ffdbdb;">
                 Watch out if your data looks like the following:
                 </div>""", unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1,2.5,1])
+    col1, col2, col3 = st.columns([1,10,1])
 
     with col2:
         st.write(pd.DataFrame({
@@ -167,7 +167,7 @@ def return_sample_rate():
                         ], overwrite=False)\
 
             .set_caption('Table 3: Dataset without any information about difference in time.')\
-            # .hide_index()\
+            
             .set_table_styles({"Time" : [
                             {
                                 "selector" :"th",
@@ -181,7 +181,7 @@ def return_sample_rate():
                     }, overwrite=False)\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
            
-            .to_html()           
+            .to_html(index=False)           
             , unsafe_allow_html=True)
     st.markdown('')
     st.markdown("""

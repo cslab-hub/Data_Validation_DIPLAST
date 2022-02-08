@@ -5,20 +5,33 @@ from PIL import Image
 
 def return_file_format():
 
-    hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
-    
+    # hide_table_row_index = """
+    #         <style>
+    #         tbody th {display:none}
+    #         .blank {display:none}
+    #         </style>
+    #         """
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    st.title('File Formats')
+
+    st.markdown("""
+    Storage systems store your data as files and these different formats provide benefits to the users.
+    File formats are specificaly designed to store specific types of information.
+    How you store your data is critical and you need to consider the most optimal format to work with.
+    Things to consider are:
+
+    - Structure of your data
+    - Easy to read
+    - Compatability
+
+    """)
+
     st.title('What is the file format of your data?')
 
     st.markdown("""
                 ### Take a look at your dataset in the folder where it is stored.\n
                 The file contains a specific file extension which is found after the filename.
-                For example, a file called dataset.csv has the file format comma-separated-value.
+                For example, a file called dataset.csv has the file format comma-separated-value (.csv).
                 Excel files would have the name: .xlsx or .xsl.
                 
                 After you have found your file format, you can select it in the drop-down menu below:
@@ -44,6 +57,9 @@ def return_file_format():
                         {"selector":"th",
                         "props":[("text-align","center")],
                         },
+                        {"selector":"th:row_heading",
+                        "props":[("display","None")],
+                        },
                         {"selector":"td",
                         "props":[("text-align","center")],
                         },
@@ -52,11 +68,12 @@ def return_file_format():
                         }
 
                         ]).set_caption("Table 1: Dataset.")\
+                        .format(precision=2)\
                         .hide_index()\
                         .to_html()           
                         , unsafe_allow_html=True)
 
-        
+        st.markdown('')
         st.warning('Also try saving your data with a comma that separates values: Var1, Var2 instead of Var1; Var2. That makes it easier to process the data in software since they assume a comma as the seperator between values.')
         
     
@@ -73,10 +90,12 @@ def return_file_format():
 
 
         st.markdown("""
-        #### For simple manipulation of your data, and if programming knowledge is not available in your organization, we recommend to stick to Excel.\n
-        However, if you are interested to learn more about Data Science, the standard way to store data is with a Comma Seperated Value file, called .csv.\n
-        These files are just plain text files that store your data, which can be very easily used in programming languages to manipulate them.
+        #### For simple manipulation of your data, and if programming knowledge is not available in your organization, we recommend to stick to Excel.
+        However, if you are interested to learn more about Data Science, the standard way to store data is with a Comma Seperated Value file, called .csv.
+        These files are just plain text files that store your data, which can be very easily used in any programming languages to manipulate them.
         
+        For example, Table 2 shows a very simple dataset just like is visible in Figure 1. 
+        However, the data format is just a plain text file which can be copy-pasted bellow and used in other programs or software:
         """)
         
         st.write(pd.DataFrame({
@@ -97,6 +116,7 @@ def return_file_format():
                         }
 
                         ]).set_caption("Table 2: Dataset.")\
+                            .format(precision=2)\
                         .hide_index()\
                         .to_html()           
                         , unsafe_allow_html=True)

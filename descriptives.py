@@ -126,6 +126,7 @@ def return_descriptives():
                         ], overwrite=False)\
 
             .set_caption('Table 2: Descriptives of the dataset.')\
+            .format(precision=2)\
             # .hide_index()\
             # .set_table_styles({"Time" : [
             #                 {

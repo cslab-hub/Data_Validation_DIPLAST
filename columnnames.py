@@ -32,9 +32,9 @@ def return_column_names():
                             {"selector":"caption",
                         "props":[("text-align","center"),("caption-side","top")],
                         },
-                        {"selector":"th",
+                        {"selector":"thead",
                         "props":[("text-align","center"),("border","3px solid black")],
-                        },
+                        },                   
                         {"selector":"td",
                         "props":[("text-align","center")],
                         },
@@ -53,23 +53,30 @@ def return_column_names():
         ['','Ex1Var1_01','Heat_sensor1','Drehzalh01','No Variable Names'],format_func=lambda x: 'Select an option' if x == '' else x)
     
     if option == 'Ex1Var1_01':
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
                 'Ex1Var1_01': [1.21, 1.25, 1.31, 1.27],
                 'Ex1Var2_02': [10.21, 10.33, 11.12, 10.87],
                 'Ex2Var25_i0': [11.21, 11.19, 11.15, 10.99],
                 'Ex2Var29_i2': [11.15, 11.10, 10.98, 11.03],
             }).style.set_table_styles([
-                           {'selector': 'thead',
-                            'props': [('text-align', 'center;'),("border", "3px solid black;")]
-                            },
-
                             {"selector":"caption",
-                            "props":[("text-align","center;")],
-                            },
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"thead",
+                        "props":[("text-align","center")],
+                        },                   
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
-                        ], overwrite=False)\
-                        .set_caption("Table 2: Random Dataset.")\
-                        .format(precision=2))
+                        ]).set_caption("Table 2: Random Dataset.")\
+                        .format(precision=2)\
+                        .hide_index()\
+                        .to_html()           
+                        , unsafe_allow_html=True)
         
         st.subheader('Here are some tips to improve readability:')
         
@@ -97,46 +104,62 @@ def return_column_names():
 
 
     if option == 'Heat_sensor1':
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
                 'Heat_sensor1': [1.21, 1.25, 1.31, 1.27],
                 'Heat_sensor2': [10.21, 10.33, 11.12, 10.87],
                 'Pressure_sensor1': [11.21, 11.19, 11.15, 10.99],
                 'Pressure_sensor2': [11.15, 11.10, 10.98, 11.03],
             }).style.set_table_styles([
-                           {'selector': 'thead',
-                            'props': [('text-align', 'center;'),("border", "3px solid black;")]
-                            },
-
                             {"selector":"caption",
-                            "props":[("text-align","center;")],
-                            },
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"thead",
+                        "props":[("text-align","center")],
+                        },                   
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
-                        ], overwrite=False)\
-                        .set_caption("Table 2: Random Dataset.")\
-                        .format(precision=2))
+                        ]).set_caption("Table 2: Random Dataset.")\
+                        .format(precision=2)\
+                        .hide_index()\
+                        .to_html()           
+                        , unsafe_allow_html=True)
         
+        st.markdown('')
         st.success('Your column names are of great quality!')
         st.markdown("Your data contains easy to read variables and are interpretable for anybody.")
         
     if option == 'Drehzalh01':
-        st.table(pd.DataFrame({
+        st.write(pd.DataFrame({
                 'Drehzalh01': [1.21, 1.25, 1.31, 1.27],
                 'Drehzalh02': [10.21, 10.33, 11.12, 10.87],
                 'Drehseth01': [11.21, 11.19, 11.15, 10.99],
                 'Drehseth02': [11.15, 11.10, 10.98, 11.03],
             }).style.set_table_styles([
-                           {'selector': 'thead',
-                            'props': [('text-align', 'center;'),("border", "3px solid black;")]
-                            },
-
                             {"selector":"caption",
-                            "props":[("text-align","center;")],
-                            },
+                        "props":[("text-align","center"),("caption-side","top")],
+                        },
+                        {"selector":"thead",
+                        "props":[("text-align","center")],
+                        },                   
+                        {"selector":"td",
+                        "props":[("text-align","center")],
+                        },
+                        {"selector":"",
+                        "props":[("margin-left","auto"),("margin-right","auto")],
+                        }
 
-                        ], overwrite=False)\
-                        .set_caption("Table 2: Random Dataset.")\
-                        .format(precision=2))
+                        ]).set_caption("Table 2: Random Dataset.")\
+                        .format(precision=2)\
+                        .hide_index()\
+                        .to_html()           
+                        , unsafe_allow_html=True)
         
+        st.markdown('')
         st.warning('Your column are identifyable, but English names are easier to interpet')
 
 
