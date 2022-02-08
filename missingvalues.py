@@ -158,7 +158,7 @@ def return_missing_values():
                         , unsafe_allow_html=True)
 
 
-
+    st.markdown('')
     st.error('Bad Example 1: Each variable started recording at different timepoints.')
     st.markdown('### Missing at Random')
     st.markdown("""
@@ -168,10 +168,10 @@ def return_missing_values():
     In this case, we advice to remove all the observations where even a single variable measured nothing, in order to prevent errors in the future analysis.\n
     """)
     inconsistent_df = dataframe.copy(deep = True)
-    inconsistent_df['var2'] = [np.nan, np.nan, np.nan,"4","5","6","7","8","9"]
+    # inconsistent_df['var2'] = [np.nan, np.nan, np.nan,"4","5","6","7","8","9"]
     inconsistent_df['var2'] = [np.nan, np.nan, np.nan,4,5,6,7,8,9]
 
-    inconsistent_df['var3'] = [np.nan,np.nan,np.nan,np.nan,"5","6","7","8","9"]
+    # inconsistent_df['var3'] = [np.nan,np.nan,np.nan,np.nan,"5","6","7","8","9"]
     inconsistent_df['var3'] = [np.nan,np.nan,np.nan,np.nan,5,6,7,8,9]
 
 

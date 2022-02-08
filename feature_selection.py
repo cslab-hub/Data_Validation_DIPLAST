@@ -182,7 +182,7 @@ def return_feature_selection():
     # pca = PCA(num_components)  
     # X_pca = pca.fit_transform(X_std) # fit and reduce dimension
     # print(pca.n_components_)
-    aim_target = st.slider('How much variance should be explained?', min_value=0.8, max_value=0.99, step=0.01, value=0.9)
+    aim_target = st.slider('How much variance should be explained?', min_value=0.9, max_value=0.99, step=0.01, value=0.95)
     pca = PCA(n_components = aim_target)
     X_pca = pca.fit_transform(X_std) # this will fit and reduce dimensions
     # st.markdown(f'{pca.n_components_}') # one can print and see how many components are selected. In this case it is 4 same as above we saw in step 5
@@ -199,4 +199,4 @@ def return_feature_selection():
     # st.markdown(f'The most outstanding variables in your dataset are in order from important to less important: {most_important_names}')
     
     for i,j in enumerate(most_important_names):
-        st.write(f"{i + 1}th moth important variable = {j}")
+        st.write(f"{i + 1}th most important variable = {j}")
