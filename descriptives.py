@@ -228,3 +228,18 @@ def return_descriptives():
     # fig.set_size_inches(24.5, 16.5)
     dtypeax.bar(dtype_df['VariableType'],dtype_df['Count'])
     st.pyplot(dtypefig)
+
+    st.title('Unit of Measurements')
+    st.markdown("""
+    In order to draw correct conclusions from your data, the accuracy of your measurements and calculations are crucial.
+    Measureing means measuring a comparison between standardized units and an unknown size.
+    Without mentioning the standard unit to which the unknown is compared, the numbers in your dataset itself are meaningless.
+    Therefore, we advice to find out the unit of measurement of every variable in your dataset.
+    Some variables might be easy to interpet, e.g., temperature.
+    However, some variables are a combinations of several units (pressure, rotation speeds).
+    Here, errors are easier made if not taken caution.
+    For example, if the rotation per minute is measured but you think it means rotation per second, further on calculations could be wrongly interpreted.
+    Therefore:
+    """)
+    st.success('Tip: Create a seperate notebook/piece of paper where you write down the units of measurement for each variable.')
+    st.success('Bonus: Knowing the units of measurement makes it easier for colleagues to interpret your dataset.')

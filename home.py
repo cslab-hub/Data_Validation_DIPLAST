@@ -40,14 +40,4 @@ def return_homepage():
     # st.write("""<p style=" position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">Please wait a moment and you will be redirected to the forums.</p>""", unsafe_allow_html=True)
     st.write("""<footer>  The Text which we want to insert in footer.  </footer>   """, unsafe_allow_html=True)
 
-    st.title('Find a Text Editor.')
-    st.markdown("""
-            Before you start reading the chapters, we advice to install a text editor to examine your data.
-             After you have collected your data in either .csv or .txt, we have to inspect our data.
-             Most likely you are used to Excel, however, for data analysis purposes, there are better options!
-             
-             We recommend [Sublime Text](https://www.sublimetext.com/), which can open almost any file format.
-             Another great advantage of Sublime Text is that it open files significantly faster.
-             """)
-    image = Image.open('images/sublime.png')
-    st.image(image, caption='Figure 1: Example of Sublime Text', use_column_width=True)
+    

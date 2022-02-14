@@ -8,7 +8,7 @@ from PIL import Image
 from home import *
 from fileformat import *
 from columnnames import *
-from texteditors import *
+from introduction import *
 from number_of_variables import *
 from sample_rate import *
 from descriptives import *
@@ -33,7 +33,7 @@ st.sidebar.markdown("Each chapter explains a different aspect of validating your
 
 add_selectbox = st.sidebar.radio(
     "Choose a chapter:",
-    ("Home","Chapter 1: File Format","Chapter 2: Column Names", "Chapter 3: Amount of Variables","Chapter 4: Sample Rate","Chapter 5: Descriptives","Chapter 6: Outliers","Chapter 7: Missing Values & Data Imputation","Chapter 8: Feature Selection","Chapter 9: End Result"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
+    ("Home","Introduction","Chapter 1: File Format","Chapter 2: Column Names", "Chapter 3: Amount of Variables","Chapter 4: Sample Rate","Chapter 5: Descriptives","Chapter 6: Outliers","Chapter 7: Missing Values & Data Imputation","Chapter 8: Feature Selection","Chapter 9: End Result"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
     
 )  
 
@@ -48,8 +48,8 @@ if add_selectbox == 'Home':
 if add_selectbox == 'Chapter 1: File Format':
     return_file_format()
   
-# if add_selectbox == 'Chapter 2: Text Editors':
-#     return_texteditors()
+if add_selectbox == 'Introduction':
+    return_introduction()
         
 if add_selectbox == 'Chapter 2: Column Names':
     return_column_names()
