@@ -113,6 +113,8 @@ def return_endresult():
     st.write(str(v1))
 
     st.title('profiling')
+    st.title('profiling2')
+
     from pandas_profiling import ProfileReport
     from streamlit_pandas_profiling import st_profile_report
     profile = ProfileReport(dataset, title="Pandas Profiling Report", minimal=True)
