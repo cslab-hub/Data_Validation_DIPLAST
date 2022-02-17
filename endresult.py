@@ -112,8 +112,8 @@ def return_endresult():
     v1 = verify_df(dataset, constraints_path, type_checking='strict', epsilon=0)
     st.write(str(v1))
 
-    # st.title('profiling')
-    # from pandas_profiling import ProfileReport
-    # from streamlit_pandas_profiling import st_profile_report
-    # profile = ProfileReport(dataset, title="Pandas Profiling Report")
-    # st_profile_report(profile)
+    st.title('profiling')
+    from pandas_profiling import ProfileReport
+    from streamlit_pandas_profiling import st_profile_report
+    profile = ProfileReport(dataset, title="Pandas Profiling Report", minimal=True)
+    st_profile_report(profile)
