@@ -7,13 +7,13 @@ from PIL import Image
 
 def return_sample_rate():
     
-    hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    # hide_table_row_index = """
+    #         <style>
+    #         tbody th {display:none}
+    #         .blank {display:none}
+    #         </style>
+    #         """
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
 
     html_arrow = """<p style="text-align:center"><img src="https://github.com/cslab-hub/Data_Validation_DIPLAST/blob/main/images/down-arrow.png?raw=true" width="50"></p>"""
@@ -68,8 +68,10 @@ def return_sample_rate():
                             }
                         ]
                     }, overwrite=False)\
+            .hide(axis='index')\
             .to_html()\
             # .hide_index()
+            
             , unsafe_allow_html=True)
 
 
@@ -119,7 +121,7 @@ def return_sample_rate():
                         ]
                     }, overwrite=False)\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
-           
+            .hide(axis='index')\
             .to_html()           
             , unsafe_allow_html=True)
     
@@ -180,7 +182,7 @@ def return_sample_rate():
                         ]
                     }, overwrite=False)\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
-           
+            .hide(axis='index')\
             .to_html(index=False)           
             , unsafe_allow_html=True)
     st.markdown('')
@@ -257,7 +259,7 @@ def return_sample_rate():
                         ]
                     }, overwrite=False)\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
-           
+            .hide(axis='index')\
             .to_html()           
             , unsafe_allow_html=True)
 
@@ -297,7 +299,7 @@ def return_sample_rate():
                         ]
                     }, overwrite=False)\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
-           
+            .hide(axis='index')\
             .to_html()           
             , unsafe_allow_html=True)
 

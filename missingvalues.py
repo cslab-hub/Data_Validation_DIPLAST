@@ -59,8 +59,11 @@ def return_missing_values():
     # df.drop('Measurement')
     df = df.iloc[0:,:]
 
-    
-    st.error('Bad Example 2: There are  various missing values scattered around your dataset.')
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ffdbdb; border-color: #ffbebe;">
+                Bad Example 1: There are  various missing values scattered around your dataset.
+                </div>""", unsafe_allow_html=True)
+
+
     st.markdown("""
     It could occur that the variables in your dataset have scattered missing values. 
     In this case, it is possible to delete these observations as well, but also imputing them from their neighbours. 
@@ -111,7 +114,8 @@ def return_missing_values():
 
                         ]).highlight_null(null_color='tomato').format(precision=0)\
                         .set_caption("Table 1: Dataset with random numbers missing.")\
-                        .hide_index()\
+                        # .hide_index()\
+                        .hide(axis='index')\
                         .to_html()\
                         # .highlight_null(null_color='tomato')
                         , unsafe_allow_html=True)
@@ -152,14 +156,16 @@ def return_missing_values():
 
                         ]).highlight_null(null_color='tomato').format(precision=0)\
                         .set_caption("Table 2: Dataset the measurements imputed.")\
-                        .hide_index()\
+                        # .hide_index()\
+                        .hide(axis='index')\
                         .to_html()\
                         # .highlight_null(null_color='tomato')
                         , unsafe_allow_html=True)
 
 
     st.markdown('')
-    st.error('Bad Example 1: Each variable started recording at different timepoints.')
+
+
     st.markdown('### Missing at Random')
     st.markdown("""
     When data is missing at random, the missing data is only caused by other variables in the dataset. 
@@ -167,6 +173,9 @@ def return_missing_values():
     However, this is caused because another variable started recording earlier, so this 'missing' of the data is caused by the other variable measuring earlier.
     In this case, we advice to remove all the observations where even a single variable measured nothing, in order to prevent errors in the future analysis.\n
     """)
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ffdbdb; border-color: #ffbebe;">
+                Bad Example 2: Each variable started recording at different timepoints.
+                </div>""", unsafe_allow_html=True)
     inconsistent_df = dataframe.copy(deep = True)
     # inconsistent_df['var2'] = [np.nan, np.nan, np.nan,"4","5","6","7","8","9"]
     inconsistent_df['var2'] = [np.nan, np.nan, np.nan,4,5,6,7,8,9]
@@ -204,8 +213,9 @@ def return_missing_values():
                         }
 
                         ]).highlight_null(null_color='tomato').format(precision=0)\
-                        .set_caption("Table 2: Dataset with non-random numbers.")\
-                        .hide_index()\
+                        .set_caption("Table 3: Dataset with non-random numbers.")\
+                        # .hide_index()\
+                        .hide(axis='index')\
                         .to_html()\
                         # .highlight_null(null_color='tomato')
                         , unsafe_allow_html=True)
@@ -237,7 +247,8 @@ def return_missing_values():
 
                         ]).highlight_null(null_color='tomato').format(precision=0)\
                         .set_caption("Table 4: Dataset with missing measurements removed.")\
-                        .hide_index()\
+                        # .hide_index()\
+                        .hide(axis='index')\
                         .to_html()\
                         # .highlight_null(null_color='tomato')
                         , unsafe_allow_html=True)

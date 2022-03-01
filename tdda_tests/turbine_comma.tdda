@@ -1,130 +1,64 @@
 {
     "creation_metadata": {
-        "local_time": "2022-02-14 14:14:37",
-        "utc_time": "2022-02-14 13:13:37",
+        "local_time": "2022-03-01 13:13:38",
+        "utc_time": "2022-03-01 12:12:38",
         "creator": "TDDA 1.0.35",
         "host": "TUE028668",
         "user": "20191577",
-        "n_records": 851,
-        "n_selected": 851
+        "n_records": 0,
+        "n_selected": 0
     },
     "fields": {
         "ActivePower": {
-            "type": "real",
-            "min": -6.683722985,
-            "max": 1739.5502,
-            "max_nulls": 0
+            "type": "real"
         },
         "AmbientTemperatue": {
-            "type": "real",
-            "min": 24.723362,
-            "max": 32.81823242857143,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "BearingShaftTemperature": {
-            "type": "real",
-            "min": 0.0,
-            "max": 51.5682773,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "GearboxBearingTemperature": {
-            "type": "real",
-            "min": 0.0,
-            "max": 77.9288804,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "GearboxOilTemperature": {
-            "type": "real",
-            "min": 51.199266,
-            "max": 65.7380831,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "GeneratorRPM": {
-            "type": "real",
-            "min": 0.0,
-            "max": 1785.7526,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "GeneratorWinding1Temperature": {
-            "type": "real",
-            "min": 72.46040299256099,
-            "max": 116.36382799999998,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "GeneratorWinding2Temperature": {
-            "type": "real",
-            "min": 71.82665932286896,
-            "max": 115.7031925,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "HubTemperature": {
-            "type": "real",
-            "min": 0.0,
-            "max": 43.996185,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "MainBoxTemperature": {
-            "type": "real",
-            "min": 0.0,
-            "max": 47.0321976,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "NacellePosition": {
-            "type": "real",
-            "min": 71.0,
-            "max": 195.1527512551076,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "ReactivePower": {
-            "type": "real",
-            "min": -11.689150199999997,
-            "max": 93.61909979039748,
-            "max_nulls": 0
+            "type": "real"
         },
         "RotorRPM": {
-            "type": "real",
-            "min": 0.0,
-            "max": 15.993397,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "TurbineStatus": {
-            "type": "real",
-            "min": 0.0,
-            "max": 2280.4292140904176,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "WindDirection": {
-            "type": "real",
-            "min": 71.0,
-            "max": 195.1527512551076,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "WindSpeed": {
-            "type": "real",
-            "min": 5.767499060474415,
-            "max": 15.875948999999997,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "DateTime": {
-            "type": "string",
-            "min_length": 25,
-            "max_length": 25,
-            "max_nulls": 0,
-            "no_duplicates": true
+            "type": "string"
         }
     }
 }

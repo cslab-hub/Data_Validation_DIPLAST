@@ -69,7 +69,8 @@ def return_file_format():
 
                         ]).set_caption("Table 1: Dataset.")\
                         .format(precision=2)\
-                        .hide_index()\
+                        # .hide_index()\
+                        .hide(axis='index')\
                         .to_html()           
                         , unsafe_allow_html=True)
 
@@ -117,7 +118,8 @@ def return_file_format():
 
                         ]).set_caption("Table 2: Dataset.")\
                             .format(precision=2)\
-                        .hide_index()\
+                        # .hide_index()\
+                        .hide(axis='index')\
                         .to_html()           
                         , unsafe_allow_html=True)
 

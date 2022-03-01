@@ -104,7 +104,7 @@ def return_feature_selection():
 
 #
     ts_df = pd.DataFrame(columns=['t2', 't1'], data=zip(t2,t1))
-    gc_res = grangercausalitytests(ts_df, selection_taken)
+    gc_res = grangercausalitytests(ts_df, selection_taken,verbose=False)
     for i,j in enumerate(gc_res.values()):
         combined = round(np.mean([j[0]['ssr_ftest'][1], j[0]['ssr_chi2test'][1]]),3)
         st.write(f"P-value after {i} lags <= {combined}")
@@ -134,10 +134,11 @@ def return_feature_selection():
     df = df.iloc[33065:]
 
     # Drop Blade1PitchAngle columns due to high number of missing values
-    df = df.drop(['Blade1PitchAngle', 'Blade2PitchAngle', 'Blade3PitchAngle'], 1)
-    df.fillna(df.mean(), inplace=True)
+    # df = df.drop(['Blade1PitchAngle', 'Blade2PitchAngle', 'Blade3PitchAngle'], 1)
+    df = df.drop(columns=['Blade1PitchAngle', 'Blade2PitchAngle', 'Blade3PitchAngle'])
+    df.fillna(df.mean(numeric_only=True), inplace=True)
     # Drop WTG column because it doesn't add much
-    df.drop('WTG', axis=1, inplace=True)
+    df.drop(columns=['WTG'], axis=1, inplace=True)
 
     # Drop ControlBoxTemperature column because it doesn't add much
     df.drop('ControlBoxTemperature', axis=1, inplace=True)
@@ -153,14 +154,12 @@ def return_feature_selection():
     X = all_values[features]
 
     st.dataframe(X.head(40))
-    print(y.shape)
-    print(X.shape)
 
     sc = StandardScaler() # creating a StandardScaler object
     X_std = sc.fit_transform(X) # standardizing the data
 
     pca = PCA()
-    X_pca = pca.fit(X_std)
+    # X_pca = pca.fit(X_std)
 
     def pcaplotter():
         fig, ax = plt.subplots(figsize=(8,3))
@@ -182,7 +181,8 @@ def return_feature_selection():
     # pca = PCA(num_components)  
     # X_pca = pca.fit_transform(X_std) # fit and reduce dimension
     # print(pca.n_components_)
-    aim_target = st.slider('How much variance should be explained?', min_value=0.9, max_value=0.99, step=0.01, value=0.95)
+    # aim_target = st.slider('How much variance should be explained?', min_value=0.9, max_value=0.99, step=0.01, value=0.95)
+    aim_target = 0.98
     pca = PCA(n_components = aim_target)
     X_pca = pca.fit_transform(X_std) # this will fit and reduce dimensions
     # st.markdown(f'{pca.n_components_}') # one can print and see how many components are selected. In this case it is 4 same as above we saw in step 5
@@ -196,7 +196,35 @@ def return_feature_selection():
     initial_feature_names = X.columns
     # get the most important feature names
     most_important_names = [initial_feature_names[most_important[i]] for i in range(n_pcs)]
+    most_important_names = list(dict.fromkeys(most_important_names))
     # st.markdown(f'The most outstanding variables in your dataset are in order from important to less important: {most_important_names}')
     
     for i,j in enumerate(most_important_names):
         st.write(f"{i + 1}th most important variable = {j}")
+
+    # list(dict.fromkeys(most_important_names))
+
+
+
+
+    st.title('Granger Causality 2')
+    granger_selection = st.multiselect('select two columns to test to each other',df.columns)
+    granger_df = df[granger_selection]
+    gc_res = grangercausalitytests(granger_df, 4,verbose=False,)
+    for i,j in enumerate(gc_res.values()):
+        combined = round(np.mean([j[0]['ssr_ftest'][1], j[0]['ssr_chi2test'][1]]),3)
+        st.write(f"P-value after {i} lags <= {combined}")
+
+    def first_plot():
+    # fig = plt.figure()
+
+        fig, ax = plt.subplots(figsize=(16,6))
+        # ax.plot(data['value'])
+
+        # plt.scatter(data.index, data['value'], c='b', s=75)
+        # plt.plot(data.index, data['value'], linewidth=3)
+        plt.plot(granger_df)
+
+
+        return fig
+    st.pyplot(first_plot())

@@ -217,7 +217,8 @@ def return_outliers():
 
                         ]).set_caption("Table 1: Dataset with random numbers.")\
                         .format(precision=2)\
-                        .hide_index()\
+                        # .hide_index()\
+                        .hide(axis='index')\
                         .to_html()           
                         , unsafe_allow_html=True)
 

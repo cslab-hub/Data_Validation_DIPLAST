@@ -16,12 +16,14 @@ from outliers import *
 from missingvalues import *
 from feature_selection import *
 from endresult import *
+from interactive_test import *
+
 # from streamlit_option_menu import option_menu
 
 st.set_page_config(
      page_title="Data Validation",
     #  page_icon="🧊",
-    #  layout="wide",
+     layout="wide",
     #  initial_sidebar_state="expanded",
 )
 
@@ -33,7 +35,7 @@ st.sidebar.markdown("Each chapter explains a different aspect of validating your
 
 add_selectbox = st.sidebar.radio(
     "Choose a chapter:",
-    ("Home","Introduction","Chapter 1: File Format","Chapter 2: Column Names", "Chapter 3: Amount of Variables","Chapter 4: Sample Rate","Chapter 5: Descriptives","Chapter 6: Outliers","Chapter 7: Missing Values & Data Imputation","Chapter 8: Feature Selection","Chapter 9: End Result"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
+    ("Home","Introduction","Chapter 1: File Format","Chapter 2: Column Names", "Chapter 3: Amount of Variables","Chapter 4: Sample Rate","Chapter 5: Descriptives","Chapter 6: Outliers","Chapter 7: Missing Values & Data Imputation","Chapter 8: Feature Selection","Chapter 9: End Result","Interactive Test"),format_func= lambda x: 'Home' if x == 'Home' else f"{x}"
     
 )  
 
@@ -76,6 +78,9 @@ if add_selectbox == 'Chapter 8: Feature Selection':
 
 if add_selectbox == 'Chapter 9: End Result':
     return_endresult()
+
+if add_selectbox == 'Interactive Test':
+    return_interactive()
 # This removes the copyright of how the page is made
 hide_st_style = """
     <style>

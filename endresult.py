@@ -1,17 +1,18 @@
 import streamlit as st
+# st.set_page_config(layout="wide")
 import pandas as pd
 import numpy as np
 from PIL import Image 
 
 def return_endresult():
     
-    hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    # hide_table_row_index = """
+    #         <style>
+    #         tbody th {display:none}
+    #         .blank {display:none}
+    #         </style>
+    #         """
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
     
     st.title('End result')
 
@@ -49,7 +50,9 @@ def return_endresult():
     main_path = 'data/delimiter_tests/'
     st.write('delimiter used in this file was automatically detected and determined on = ',get_delimiter(main_path + option))
 
-    dataset = pd.read_csv(main_path + option,delimiter=get_delimiter(main_path+option))
+    num_of_rows = st.slider('How many rows should we use first?', 1, 10000, 25)
+
+    dataset = pd.read_csv(main_path + option,delimiter=get_delimiter(main_path+option), nrows=num_of_rows)
     dataset = dataset.iloc[0:int(dataset.shape[0] / 100),:]
     st.write(dataset.shape)
 
@@ -62,9 +65,9 @@ def return_endresult():
 
     # st.dataframe(dataset[options])
 
-    visualized_options = st.multiselect(
-     'Which variables do you want to keep?',
-     [i for i in dataset.columns],dataset.columns[1], key=1)
+    # visualized_options = st.multiselect(
+    #  'Which variables do you want to keep?',
+    #  [i for i in dataset.columns],dataset.columns[1], key=1)
 
     import matplotlib.pyplot as plt 
     import matplotlib.colors as mcolors
@@ -78,23 +81,23 @@ def return_endresult():
 
 
 
-    # new test
-    from matplotlib import gridspec
-    import math
+    #!  new test
+    # from matplotlib import gridspec
+    # import math
 
-    N = len(visualized_options)
-    cols = 2
-    rows = int(math.ceil(N / cols))
-    colors = ['b','g','r','c','m','y','k','black']
+    # N = len(visualized_options)
+    # cols = 2
+    # rows = int(math.ceil(N / cols))
+    # colors = ['b','g','r','c','m','y','k','black']
 
-    gs = gridspec.GridSpec(rows, cols)
-    fig = plt.figure()
-    for n in range(N):
-        ax = fig.add_subplot(gs[n])
-        ax.plot(dataset[visualized_options[n]], label=visualized_options[n], c=colors[n],linewidth=1)
-        ax.legend(fontsize=7)
-    fig.tight_layout()
-    st.pyplot(fig)
+    # gs = gridspec.GridSpec(rows, cols)
+    # fig = plt.figure(figsize=(12,3))
+    # for n in range(N):
+    #     ax = fig.add_subplot(gs[n])
+    #     ax.plot(dataset[visualized_options[n]], label=visualized_options[n], c=colors[n],linewidth=1)
+    #     ax.legend(fontsize=7)
+    # fig.tight_layout()
+    # st.pyplot(fig)
 
 
     st.title('test')
@@ -108,10 +111,20 @@ def return_endresult():
         
     #Show the generated constraints
     st.write(str(constraints))
+    df = pd.read_json(constraints.to_json(), orient='columns')
+    df = df.drop(['local_time', 'utc_time','creator','host','user','n_records','n_selected'])
+    df = df.drop(columns=['creation_metadata'])
+    df = df.fields.apply(pd.Series)
+    st.table(df)
+
     st.title('verify')
     v1 = verify_df(dataset, constraints_path, type_checking='strict', epsilon=0)
-    st.write(str(v1))
+    # st.write(str(v1))
+    st.table(v1.to_frame())
+    
+    
 
+    # st.dataframe(pd.read_json(constraints.to_json(), orient='index'))
     st.title('profiling')
     st.title('profiling2')
 
@@ -119,3 +132,26 @@ def return_endresult():
     from streamlit_pandas_profiling import st_profile_report
     profile = ProfileReport(dataset, title="Pandas Profiling Report", minimal=True)
     st_profile_report(profile)
+
+
+#%%
+
+# import pandas as pd 
+
+# dataset = pd.read_csv("data/delimiter_tests/turbine_comma.csv",delimiter=',', nrows=20)
+# dataset = dataset.iloc[0:int(dataset.shape[0] / 100),:]
+
+# from tdda.constraints import discover_df, verify_df
+
+# constraints = discover_df(dataset)
+# constraints_path = 'tdda_tests/' + 'turbine_comma'.split('.')[0] + '.tdda'
+# with open(constraints_path, 'w') as f:
+#     f.write(constraints.to_json())
+    
+# df = pd.read_json(constraints.to_json(), orient='columns')
+# df = df.drop(['local_time', 'utc_time','creator','host','user','n_records','n_selected'])
+# df = df.drop(columns=['creation_metadata'])
+# df = df.fields.apply(pd.Series)
+
+# v1 = verify_df(dataset, constraints_path, type_checking='strict', epsilon=0)
+# print(v1.to_frame())

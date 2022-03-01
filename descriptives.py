@@ -70,7 +70,7 @@ def return_descriptives():
                         ], overwrite=False)\
 
             .set_caption('Table 1: Sample dataset.')\
-            .hide_index()\
+            # .hide_index()\
             .set_table_styles({"Time" : [
                             {
                                 "selector" :"th",
@@ -83,7 +83,7 @@ def return_descriptives():
                         ]
                     }, overwrite=False)\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
-           
+            .hide(axis='index')\
             .to_html()           
             , unsafe_allow_html=True)
 
@@ -140,7 +140,7 @@ def return_descriptives():
             #             ]
             #         }, overwrite=False)\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
-           
+            .hide(axis='index')\
             .to_html()           
             , unsafe_allow_html=True)
 
@@ -202,7 +202,7 @@ def return_descriptives():
                         ], overwrite=False)\
 
             .set_caption('Table 3: Sample dataset.')\
-            .hide_index()\
+            # .hide_index()\
             .set_table_styles({"Time" : [
                             {
                                 "selector" :"th",
@@ -214,6 +214,7 @@ def return_descriptives():
                             }
                         ]
                     }, overwrite=False)\
+            .hide(axis='index')\
             # .applymap(lambda x: "background-color: lightgreen", subset="var1")\
            
             .to_html()           
@@ -241,5 +242,11 @@ def return_descriptives():
     For example, if the rotation per minute is measured but you think it means rotation per second, further on calculations could be wrongly interpreted.
     Therefore:
     """)
-    st.success('Tip: Create a seperate notebook/piece of paper where you write down the units of measurement for each variable.')
-    st.success('Bonus: Knowing the units of measurement makes it easier for colleagues to interpret your dataset.')
+
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ceeed8; border-color: #ceeed8;">
+                Tip: Create a seperate notebook/piece of paper where you write down the units of measurement for each variable.
+                </div>""", unsafe_allow_html=True)
+
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ceeed8; border-color: #ceeed8;">
+                Bonus: Knowing the units of measurement makes it easier for colleagues to interpret your dataset.
+                </div>""", unsafe_allow_html=True)
