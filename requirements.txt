@@ -8,3 +8,4 @@ statsmodels==0.13.1
 tdda
 pandas-profiling
 streamlit-pandas-profiling
+click==8.0.4
