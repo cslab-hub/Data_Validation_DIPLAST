@@ -110,7 +110,7 @@ def return_endresult():
         f.write(constraints.to_json())
         
     #Show the generated constraints
-    st.write(str(constraints))
+    # st.write(str(constraints))
     df = pd.read_json(constraints.to_json(), orient='columns')
     df = df.drop(['local_time', 'utc_time','creator','host','user','n_records','n_selected'])
     df = df.drop(columns=['creation_metadata'])
@@ -125,8 +125,7 @@ def return_endresult():
     
 
     # st.dataframe(pd.read_json(constraints.to_json(), orient='index'))
-    st.title('profiling')
-    st.title('profiling2')
+    st.title('Rrofiling')
 
     from pandas_profiling import ProfileReport
     from streamlit_pandas_profiling import st_profile_report

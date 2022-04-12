@@ -51,7 +51,7 @@ def return_column_names():
 
     option = st.selectbox(
         'How do your variable names look like?',
-        ['','Ex1Var1_01','Heat_sensor1','Drehzalh01','No Variable Names'],format_func=lambda x: 'Select an option' if x == '' else x)
+        ['','Ex1Var1_01','Heat_sensor1','Drehzalh01',"heatsensor,1",'No Variable Names'],format_func=lambda x: 'Select an option' if x == '' else x)
     
     if option == 'Ex1Var1_01':
         st.write(pd.DataFrame({
@@ -178,3 +178,29 @@ def return_column_names():
         st.warning("""Your data contains columns but are not identifyable by name.
                    Ask your data supplier for specific information about what each column/variable measures.
                    """)
+    
+    if option == 'heatsensor,1':
+        e = np.random.normal(size=(5,2))  
+        e_dataframe = pd.DataFrame(e)
+        e_dataframe.columns = ['heatsensorA,1','heatsensorB,2']
+        
+        
+        # st.table(e_dataframe.style.format('{:.2f}'))
+        
+        st.error("""Your dataset could be read wronly if the delimiter of your dataset is a comma.
+        What then happens is that the dataset will be split into the following dataset:
+                   """)
+
+        e_2 = e_dataframe.copy(deep = True)
+        e_2['var1'] = e_2['heatsensorA,1']+2
+        e_2['var2'] = e_2['heatsensorB,2']-1
+        print(e_2.shape)
+        e_2.columns = ['heatsensorA','1','heatsensorB','2']
+        # st.table(e_2.style.format('{:.2f}'))
+        st.table(e_2)
+
+        st.markdown('''
+        While your desired goal maybe actually the following dataset:
+        ''')
+
+        st.table(e_dataframe.style.format('{:.2f}'))

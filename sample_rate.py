@@ -196,7 +196,7 @@ def return_sample_rate():
                 """)
     
     st.title('How to improve')
-    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px;  background-color: #ceeed8; border-color: #ceeed8;">
+    st.write("""<div style="padding: 15px; text-align:center; border: 1px solid transparent; border-color: transparent; margin-bottom: 50px; border-radius: 4px;  background-color: #ceeed8; border-color: #ceeed8;">
                 Tip 1: Calculate rolling average to smooth out observations
                 </div>""", unsafe_allow_html=True)
 
