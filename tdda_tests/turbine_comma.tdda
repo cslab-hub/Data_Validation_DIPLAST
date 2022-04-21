@@ -1,131 +1,64 @@
 {
     "creation_metadata": {
-        "local_time": "2022-03-03 13:13:31",
-        "utc_time": "2022-03-03 12:12:31",
+        "local_time": "2022-04-21 11:11:58",
+        "utc_time": "2022-04-21 09:09:58",
         "creator": "TDDA 1.0.35",
         "host": "TUE028668",
         "user": "20191577",
-        "n_records": 28,
-        "n_selected": 28
+        "n_records": 0,
+        "n_selected": 0
     },
     "fields": {
         "ActivePower": {
-            "type": "real",
-            "min": 1711.8243049999994,
-            "max": 1736.691025,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "AmbientTemperatue": {
-            "type": "real",
-            "min": 26.0683424,
-            "max": 29.176469375,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "BearingShaftTemperature": {
-            "type": "real",
-            "min": 41.996441125,
-            "max": 48.58228666666667,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "GearboxBearingTemperature": {
-            "type": "real",
-            "min": 64.23417012438117,
-            "max": 77.120122,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "GearboxOilTemperature": {
-            "type": "real",
-            "min": 57.56121732531465,
-            "max": 64.20439937500001,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "GeneratorRPM": {
-            "type": "real",
-            "min": 1102.026268943974,
-            "max": 1761.3399444444449,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "GeneratorWinding1Temperature": {
-            "type": "real",
-            "min": 72.46040299256099,
-            "max": 113.29087075,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "GeneratorWinding2Temperature": {
-            "type": "real",
-            "min": 71.82665932286896,
-            "max": 112.59216325,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "HubTemperature": {
-            "type": "real",
-            "min": 36.758155875,
-            "max": 42.996094375,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "MainBoxTemperature": {
-            "type": "real",
-            "min": 35.402762555555555,
-            "max": 41.89842625,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "NacellePosition": {
-            "type": "real",
-            "min": 195.1527512551076,
-            "max": 195.1527512551076,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "ReactivePower": {
-            "type": "real",
-            "min": -1.4554797835555553,
-            "max": 1.8245865966666663,
-            "max_nulls": 0
+            "type": "real"
         },
         "RotorRPM": {
-            "type": "real",
-            "min": 9.907499646722686,
-            "max": 15.774645444444443,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "TurbineStatus": {
-            "type": "real",
-            "min": 0.0,
-            "max": 2280.4292140904176,
-            "sign": "non-negative",
-            "max_nulls": 0
+            "type": "real"
         },
         "WindDirection": {
-            "type": "real",
-            "min": 195.1527512551076,
-            "max": 195.1527512551076,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "WindSpeed": {
-            "type": "real",
-            "min": 5.767499060474415,
-            "max": 5.767499060474415,
-            "sign": "positive",
-            "max_nulls": 0
+            "type": "real"
         },
         "DateTime": {
-            "type": "string",
-            "min_length": 25,
-            "max_length": 25,
-            "max_nulls": 0,
-            "no_duplicates": true
+            "type": "string"
         }
     }
 }

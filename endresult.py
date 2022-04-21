@@ -6,151 +6,42 @@ from PIL import Image
 
 def return_endresult():
     
-    # hide_table_row_index = """
-    #         <style>
-    #         tbody th {display:none}
-    #         .blank {display:none}
-    #         </style>
-    #         """
-    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
-    
     st.title('End result')
 
-    path = 'data/delimiter_tests/turbine_semicolon.csv'
-    import csv
-    def get_delimiter(file_path, bytes = 4096):
-        sniffer = csv.Sniffer()
-        data = open(file_path, "r").read(bytes)
-        delimiter = sniffer.sniff(data).delimiter
-        return delimiter
-
-
-
-    import os
-    # st.write(os.listdir("data/"))
-
-    import os
-
-    def files(path):  
-        for file in os.listdir(path):
-            if os.path.isfile(os.path.join(path, file)):
-                yield file
-
-    filelist = []
-    for file in files("data/delimiter_tests/"):  
-        extension = file.split('.')[-1]
-        if str(extension) in ['csv','txt','xlxs']:
-            filelist.append(file)
-
-    option = st.selectbox(
-     'Which dataset do you want to investigate?',
-     ([i for i in filelist]))
-
-    st.write('You selected:', option)
-    main_path = 'data/delimiter_tests/'
-    st.write('delimiter used in this file was automatically detected and determined on = ',get_delimiter(main_path + option))
-
-    num_of_rows = st.slider('How many rows should we use first?', 1, 10000, 25)
-
-    dataset = pd.read_csv(main_path + option,delimiter=get_delimiter(main_path+option), nrows=num_of_rows)
-    dataset = dataset.iloc[0:int(dataset.shape[0] / 100),:]
-    st.write(dataset.shape)
-
-    st.dataframe(dataset.head(20), height=500)
-
-
-    # options = st.multiselect(
-    #  'Which variables do you want to keep?',
-    #  [i for i in dataset.columns],dataset.columns[1], key=0)
-
-    # st.dataframe(dataset[options])
-
-    # visualized_options = st.multiselect(
-    #  'Which variables do you want to keep?',
-    #  [i for i in dataset.columns],dataset.columns[1], key=1)
-
-    import matplotlib.pyplot as plt 
-    import matplotlib.colors as mcolors
-    colors = ['b','g','r','c','m','y','k','black']
-
-    # for i,j in enumerate(visualized_options):
-    #     fig, ax = plt.subplots(figsize=(8,3))
-    #     ax.plot(dataset[j], label=j, c=colors[i],linewidth=1)
-    #     ax.legend()
-    #     st.pyplot(fig)
-
-
-
-    #!  new test
-    # from matplotlib import gridspec
-    # import math
-
-    # N = len(visualized_options)
-    # cols = 2
-    # rows = int(math.ceil(N / cols))
-    # colors = ['b','g','r','c','m','y','k','black']
-
-    # gs = gridspec.GridSpec(rows, cols)
-    # fig = plt.figure(figsize=(12,3))
-    # for n in range(N):
-    #     ax = fig.add_subplot(gs[n])
-    #     ax.plot(dataset[visualized_options[n]], label=visualized_options[n], c=colors[n],linewidth=1)
-    #     ax.legend(fontsize=7)
-    # fig.tight_layout()
-    # st.pyplot(fig)
-
-
-    st.title('test')
-
-    from tdda.constraints import discover_df, verify_df
-
-    constraints = discover_df(dataset)
-    constraints_path = 'tdda_tests/' + option.split('.')[0] + '.tdda'
-    with open(constraints_path, 'w') as f:
-        f.write(constraints.to_json())
-        
-    #Show the generated constraints
-    # st.write(str(constraints))
-    df = pd.read_json(constraints.to_json(), orient='columns')
-    df = df.drop(['local_time', 'utc_time','creator','host','user','n_records','n_selected'])
-    df = df.drop(columns=['creation_metadata'])
-    df = df.fields.apply(pd.Series)
-    st.table(df)
-
-    st.title('verify')
-    v1 = verify_df(dataset, constraints_path, type_checking='strict', epsilon=0)
-    # st.write(str(v1))
-    st.table(v1.to_frame())
+    st.markdown('''
+    The end result of your dataset should look like the following. \\
+    (1) There should be one variable that determines the time for all variables, which is shown here as "Time". \\
+    (2) All variables in your dataset should have a measurement at each moment in time of this "Time" variable, there are no missing values.
     
+    ''')
+
+    # col1, col2, col3 = st.columns([1,2.5,1])
+
+    # with col2:
+    st.write(pd.DataFrame({
+            'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
+            'Sensor1': [10, 10, 11, 10],
+            'Sensor2': [14,15,14,14],
+            'Sensor3': [100.1,100.3,100.2,100.0],
+            'Sensor4': [90.1,89.4,88.3,90]
+        }).style.set_table_styles([
+                    {"selector":"caption",
+                    "props":[("text-align","center"),("caption-side","top")],
+                    },                
+                    {"selector":"td",
+                    "props":[("text-align","center")],
+                    },
+                    {"selector":"",
+                    "props":[("margin-left","auto"),("margin-right","auto")],
+                    }
+
+                    ]).set_caption("Table 1: Dataset.")\
+                    .format(precision=2)\
+                    .hide(axis='index')\
+                    .to_html()           
+                    , unsafe_allow_html=True)
+    st.text('')
+    st.markdown('''
+    The Process Analytics tool expects this data format, in order to make it general for multiple companies to use.
     
-
-    # st.dataframe(pd.read_json(constraints.to_json(), orient='index'))
-    st.title('Rrofiling')
-
-    from pandas_profiling import ProfileReport
-    from streamlit_pandas_profiling import st_profile_report
-    profile = ProfileReport(dataset, title="Pandas Profiling Report", minimal=True)
-    st_profile_report(profile)
-
-
-#%%
-
-# import pandas as pd 
-
-# dataset = pd.read_csv("data/delimiter_tests/turbine_comma.csv",delimiter=',', nrows=20)
-# dataset = dataset.iloc[0:int(dataset.shape[0] / 100),:]
-
-# from tdda.constraints import discover_df, verify_df
-
-# constraints = discover_df(dataset)
-# constraints_path = 'tdda_tests/' + 'turbine_comma'.split('.')[0] + '.tdda'
-# with open(constraints_path, 'w') as f:
-#     f.write(constraints.to_json())
-    
-# df = pd.read_json(constraints.to_json(), orient='columns')
-# df = df.drop(['local_time', 'utc_time','creator','host','user','n_records','n_selected'])
-# df = df.drop(columns=['creation_metadata'])
-# df = df.fields.apply(pd.Series)
-
-# v1 = verify_df(dataset, constraints_path, type_checking='strict', epsilon=0)
-# print(v1.to_frame())
+    ''')

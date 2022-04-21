@@ -52,62 +52,62 @@ def return_feature_selection():
 
             .set_caption('Table 2.'))
 
-    st.title('Granger Causality')
-    st.markdown("""The Granger Causality is a statistical test for finding out wether one timeseries is usefull in forecasting another.
-    In other words, a variable X granger-causes variable Y, of the values of X provide statistical significant information about future values of Y.
+#     st.title('Granger Causality')
+#     st.markdown("""The Granger Causality is a statistical test for finding out wether one timeseries is usefull in forecasting another.
+#     In other words, a variable X granger-causes variable Y, of the values of X provide statistical significant information about future values of Y.
 
 
     
     
-    """)
+#     """)
 
-    #build the time series, just a simple AR(1)
-    np.random.seed(2)
-    t1 = [0.1*np.random.normal()]
-    for _ in range(45):
-        t1.append(0.5*t1[-1] + 0.1*np.random.normal())
+#     #build the time series, just a simple AR(1)
+#     np.random.seed(2)
+#     t1 = [0.1*np.random.normal()]
+#     for _ in range(45):
+#         t1.append(0.5*t1[-1] + 0.1*np.random.normal())
 
-    t2 = [item + 0.1*np.random.normal() for item in t1]
-    t2 = [item + 0.03*np.random.normal() for item in t1]
+#     t2 = [item + 0.1*np.random.normal() for item in t1]
+#     t2 = [item + 0.03*np.random.normal() for item in t1]
 
-    t1 = t1[3:]
-    t2 = t2[:-3]
+#     t1 = t1[3:]
+#     t2 = t2[:-3]
 
-    def grangercausality():
-        fig, ax = plt.subplots(figsize=(8,3))
+#     def grangercausality():
+#         fig, ax = plt.subplots(figsize=(8,3))
 
-        plt.figure(figsize=(7,2))
-        ax.plot(t1, color='b')
-        ax.plot(t2, color='r')
+#         plt.figure(figsize=(7,2))
+#         ax.plot(t1, color='b')
+#         ax.plot(t2, color='r')
 
-        ax.annotate('Lagging Peak', xy=(12, 0.2),  xycoords='data',
-            xytext=(0.6, 0.95), textcoords='axes fraction',
-            arrowprops=dict(facecolor='black', shrink=0.05),
-            horizontalalignment='right', verticalalignment='top',
-            )
+#         ax.annotate('Lagging Peak', xy=(12, 0.2),  xycoords='data',
+#             xytext=(0.6, 0.95), textcoords='axes fraction',
+#             arrowprops=dict(facecolor='black', shrink=0.05),
+#             horizontalalignment='right', verticalalignment='top',
+#             )
 
-        ax.annotate('Lagging Low', xy=(28.5, -0.2),  xycoords='data',
-            xytext=(0.9, 0.2), textcoords='axes fraction',
-            arrowprops=dict(facecolor='black', shrink=0.1),
-            horizontalalignment='right', verticalalignment='top',
-            )
-        ax.set_title("Figure 1: Granger Causality with peaks highlighted by arrows.", y=-0.25)
-        ax.legend(['Original', 'Lagged'], fontsize=8)
+#         ax.annotate('Lagging Low', xy=(28.5, -0.2),  xycoords='data',
+#             xytext=(0.9, 0.2), textcoords='axes fraction',
+#             arrowprops=dict(facecolor='black', shrink=0.1),
+#             horizontalalignment='right', verticalalignment='top',
+#             )
+#         ax.set_title("Figure 1: Granger Causality with peaks highlighted by arrows.", y=-0.25)
+#         ax.legend(['Original', 'Lagged'], fontsize=8)
 
-        return fig
+#         return fig
 
-    st.pyplot(grangercausality())
+#     st.pyplot(grangercausality())
 
-    selection_taken = st.slider(
-        'Select how many monents in time to look back:',
-        1, 6)
+#     selection_taken = st.slider(
+#         'Select how many monents in time to look back:',
+#         1, 6)
 
-#
-    ts_df = pd.DataFrame(columns=['t2', 't1'], data=zip(t2,t1))
-    gc_res = grangercausalitytests(ts_df, selection_taken,verbose=False)
-    for i,j in enumerate(gc_res.values()):
-        combined = round(np.mean([j[0]['ssr_ftest'][1], j[0]['ssr_chi2test'][1]]),3)
-        st.write(f"P-value after {i} lags <= {combined}")
+# #
+#     ts_df = pd.DataFrame(columns=['t2', 't1'], data=zip(t2,t1))
+#     gc_res = grangercausalitytests(ts_df, selection_taken,verbose=False)
+#     for i,j in enumerate(gc_res.values()):
+#         combined = round(np.mean([j[0]['ssr_ftest'][1], j[0]['ssr_chi2test'][1]]),3)
+#         st.write(f"P-value after {i} lags <= {combined}")
 
 
     #######################################################
@@ -207,24 +207,3 @@ def return_feature_selection():
 
 
 
-    st.title('Granger Causality 2')
-    granger_selection = st.multiselect('select two columns to test to each other',df.columns)
-    granger_df = df[granger_selection]
-    gc_res = grangercausalitytests(granger_df, 4,verbose=False,)
-    for i,j in enumerate(gc_res.values()):
-        combined = round(np.mean([j[0]['ssr_ftest'][1], j[0]['ssr_chi2test'][1]]),3)
-        st.write(f"P-value after {i} lags <= {combined}")
-
-    def first_plot():
-    # fig = plt.figure()
-
-        fig, ax = plt.subplots(figsize=(16,6))
-        # ax.plot(data['value'])
-
-        # plt.scatter(data.index, data['value'], c='b', s=75)
-        # plt.plot(data.index, data['value'], linewidth=3)
-        plt.plot(granger_df)
-
-
-        return fig
-    st.pyplot(first_plot())
