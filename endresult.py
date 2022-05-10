@@ -12,12 +12,8 @@ def return_endresult():
     The end result of your dataset should look like the following. \\
     (1) There should be one variable that determines the time for all variables, which is shown here as "Time". \\
     (2) All variables in your dataset should have a measurement at each moment in time of this "Time" variable, there are no missing values.
-    
     ''')
 
-    # col1, col2, col3 = st.columns([1,2.5,1])
-
-    # with col2:
     st.write(pd.DataFrame({
             'Time': ['21-12-21 10:00:00', '21-12-21 10:00:01','21-12-21 10:00:02','21-12-21 10:00:03'],
             'Sensor1': [10, 10, 11, 10],
